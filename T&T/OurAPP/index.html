@@ -1,2122 +1,922 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Relationship🔗💗</title>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <meta name="description" content="Our Beatiful and cute Relationship">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
-    <style>
-        /* Enhanced Modern Friendship Counter CSS */
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            /* Light mode colors */
-            --bg-primary: #180f0f;
-            --bg-secondary: #1e293b;
-            --bg-card: #00000013;
-            --text-primary: #f8fafc;
-            --text-secondary: #cbd5e1;
-            --text-muted: #64748b;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --error-color: #ef4444;
-            --shadow-light: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-            --shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-heavy: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --gradient-primary: linear-gradient(135deg, #ea6666 0%, #8e4ba2 100%);
-            --gradient-accent: linear-gradient(135deg, #00000007 50%, #27151518 80%);
-            --gradient-success: linear-gradient(135deg, #380c0c 10%, #7e1111 80%);
-            --transition-fast: all 0.15s ease;
-            --transition-medium: all 0.3s ease;
-            --transition-slow: all 0.6s ease;
-            --border-radius: 12px;
-            --border-radius-lg: 16px;
-            --spacing-xs: 0.5rem;
-            --spacing-sm: 1rem;
-            --spacing-md: 1.5rem;
-            --spacing-lg: 2rem;
-            --spacing-xl: 3rem;
-        }
-
-        /* Dark mode colors */
-        body.dark-mode {
-            --bg-primary: #180f0f;
-            --bg-secondary: #1e293b;
-            --bg-card: #00000013;
-            --text-primary: #f8fafc;
-            --text-secondary: #cbd5e1;
-            --text-muted: #64748b;
-            --border-color: #47556900;
-            --shadow-light: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-            --shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
-            --shadow-heavy: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
-        }
-
-        body {
-            background: var(--bg-primary);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
-            color: var(--text-primary);
-            line-height: 1.6;
-            font-weight: 400;
-            transition: var(--transition-medium);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* Confetti Canvas */
-        #confetti-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9999;
-        }
-
-        /* Container and Layout */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: var(--spacing-lg) var(--spacing-md);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: var(--spacing-xl);
-        }
-
-        /* Header */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            max-width: 900px;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 0.1s forwards;
-            flex-wrap: wrap;
-            gap: var(--spacing-sm);
-        }
-
-        .mode-toggle {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            padding: var(--spacing-xs) var(--spacing-md);
-            font-size: 0.875rem;
-            font-weight: 600;
-            cursor: pointer;
-            border-radius: var(--border-radius);
-            font-family: inherit;
-            transition: var(--transition-fast);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .mode-toggle:hover {
-            background: var(--text-primary);
-            color: var(--bg-primary);
-            border-color: var(--text-primary);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-medium);
-        }
-
-        /* Typography */
-        .title {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 700;
-            background: var(--gradient-primary);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-align: center;
-            letter-spacing: -0.02em;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 0.2s forwards;
-            margin-bottom: var(--spacing-md);
-        }
-
-        .milestone {
-            font-size: 1.125rem;
-            color: var(--text-secondary);
-            text-align: center;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 0.3s forwards;
-            margin-bottom: var(--spacing-xl);
-            padding: var(--spacing-sm) var(--spacing-lg);
-            background: var(--bg-card);
-            border-radius: var(--border-radius);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-light);
-        }
-
-        /* Counter Grid */
-        .counter-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: var(--spacing-md);
-            width: 100%;
-            max-width: 900px;
-            margin: var(--spacing-xl) 0;
-        }
-
-        .counter-item {
-            background: var(--bg-card);
-            padding: var(--spacing-xl) var(--spacing-lg);
-            border-radius: var(--border-radius-lg);
-            box-shadow: var(--shadow-medium);
-            transition: var(--transition-medium);
-            cursor: pointer;
-            text-align: center;
-            border: 1px solid var(--border-color);
-            opacity: 0;
-            animation: fadeInUp 0.6s ease forwards;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .counter-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: var(--transition-slow);
-        }
-
-        .counter-item:hover::before {
-            left: 100%;
-        }
-
-        .counter-item:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: var(--shadow-heavy);
-            border-color: var(--accent-primary);
-        }
-
-        .counter-item:active {
-            transform: translateY(-4px) scale(1.01);
-        }
-
-        .counter-number {
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            font-weight: 800;
-            color: var(--text-primary);
-            margin-bottom: var(--spacing-xs);
-            letter-spacing: -0.01em;
-            display: block;
-            line-height: 1;
-        }
-
-        .counter-label {
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-weight: 600;
-            font-size: 0.875rem;
-        }
-
-        /* Hide/Show Time Units */
-        .minutes-hidden,
-        .seconds-hidden {
-            display: none !important;
-        }
-
-        .stats-hidden {
-            display: none !important;
-        }
-
-        /* Controls */
-        .controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: var(--spacing-sm);
-            margin: var(--spacing-lg) 0;
-            flex-wrap: wrap;
-        }
-
-        .toggle-button {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            padding: var(--spacing-sm) var(--spacing-lg);
-            font-size: 0.875rem;
-            font-weight: 600;
-            cursor: pointer;
-            border-radius: var(--border-radius);
-            font-family: inherit;
-            transition: var(--transition-fast);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .toggle-button:hover {
-            background: var(--accent-primary);
-            color: white;
-            border-color: var(--accent-primary);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-medium);
-        }
-
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--spacing-lg);
-            width: 100%;
-            max-width: 900px;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 0.4s forwards;
-        }
-
-        .stat-item {
-            background: var(--bg-card);
-            padding: var(--spacing-lg);
-            border-radius: var(--border-radius);
-            border: 1px solid var(--border-color);
-            transition: var(--transition-medium);
-            text-align: left;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--gradient-accent);
-            transform: scaleY(0);
-            transition: var(--transition-medium);
-        }
-
-        .stat-item:hover::before {
-            transform: scaleY(1);
-        }
-
-        .stat-item:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-medium);
-            border-color: var(--text-muted);
-        }
-
-        .stat-label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-weight: 600;
-            margin-bottom: var(--spacing-xs);
-        }
-
-        .stat-value {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        /* Birthday and Timezone Sections */
-        .birthday-section,
-        .timezone-section {
-            width: 100%;
-            max-width: 500px;
-            padding: var(--spacing-xl);
-            border-radius: var(--border-radius-lg);
-            text-align: center;
-            box-shadow: var(--shadow-medium);
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 0.6s forwards;
-            background: var(--bg-card);
-            border: 2px solid var(--border-color);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .birthday-section {
-            border-color: var(--warning-color);
-            background: linear-gradient(135deg, #553838, #332986);
-        }
-
-        body.dark-mode .birthday-section {
-            background: linear-gradient(135deg, #2d1b00, #3d2900);
-        }
-
-        .timezone-section {
-            border-color: #2196f3;
-            background: linear-gradient(135deg, #4b2f3e, #2f1431);
-        }
-
-        body.dark-mode .timezone-section {
-            background: linear-gradient(135deg, #0a263f, #1a365d);
-        }
-
-        .birthday-title,
-        .timezone-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: var(--spacing-lg);
-            color: var(--text-primary);
-        }
-
-        .birthday-grid {
-            display: flex;
-            justify-content: center;
-            gap: var(--spacing-lg);
-            flex-wrap: wrap;
-        }
-
-        .timezone-grid {
-            display: flex;
-            justify-content: center;
-            gap: var(--spacing-lg);
-            flex-wrap: wrap;
-        }
-
-        .timezone-item {
-            background: var(--bg-card);
-            padding: var(--spacing-lg);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-light);
-            min-width: 180px;
-            border: 1px solid var(--border-color);
-        }
-
-        .timezone-label {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            margin-bottom: var(--spacing-xs);
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        .timezone-value {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        /* Language Switcher */
-        .language-switcher {
-            position: fixed;
-            top: var(--spacing-md);
-            right: var(--spacing-md);
-            z-index: 1000;
-            display: flex;
-            background: rgba(31, 16, 16, 0.644);
-            backdrop-filter: blur(10px);
-            border-radius: 50px;
-            padding: 6px;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-medium);
-            transition: var(--transition-medium);
-        }
-
-        body.dark-mode .language-switcher {
-            background: rgba(15, 23, 42, 0.95);
-        }
-
-        .language-switcher::before {
-            content: '';
-            position: absolute;
-            top: 8px;
-            left: 8px;
-            width: 72px;
-            height: 40px;
-            background: var(--gradient-primary);
-            border-radius: 40px;
-            transition: var(--transition-medium);
-            z-index: 1;
-            box-shadow: var(--shadow-light);
-        }
-
-        .language-switcher.en::before {
-            transform: translateX(76px);
-            background: var(--gradient-accent);
-        }
-
-        .language-switcher button {
-            background: none;
-            border: none;
-            padding: var(--spacing-sm) var(--spacing-md);
-            font-size: 0.875rem;
-            cursor: pointer;
-            position: relative;
-            z-index: 2;
-            transition: var(--transition-fast);
-            border-radius: 30px;
-            color: var(--text-secondary);
-            font-weight: 600;
-            min-width: 72px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .language-switcher button.active {
-            color: white;
-            font-weight: 700;
-        }
-
-        /* Notification */
-        .notification {
-            position: fixed;
-            top: calc(var(--spacing-md) + 60px);
-            right: var(--spacing-md);
-            background: var(--success-color);
-            color: white;
-            padding: var(--spacing-sm) var(--spacing-lg);
-            border-radius: var(--border-radius);
-            font-size: 0.875rem;
-            font-weight: 600;
-            opacity: 0;
-            transform: translateX(100%);
-            transition: var(--transition-medium);
-            z-index: 1001;
-            box-shadow: var(--shadow-heavy);
-            max-width: 300px;
-        }
-
-        .notification.show {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .notification.error {
-            background: var(--error-color);
-        }
-
-        .notification.warning {
-            background: var(--warning-color);
-        }
-
-        /* Description */
-        .description {
-            font-size: 1.125rem;
-            color: var(--text-secondary);
-            text-align: center;
-            margin: var(--spacing-lg) 0;
-            padding: var(--spacing-md);
-            background: var(--bg-card);
-            border-radius: var(--border-radius);
-            border: 1px solid var(--border-color);
-        }
-
-        .date-highlight {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        /* Links */
-        a {
-            color: var(--accent-primary);
-            text-decoration: none;
-            transition: var(--transition-fast);
-            font-weight: 500;
-        }
-
-        a:hover {
-            color: var(--accent-secondary);
-            text-decoration: underline;
-        }
-
-        /* Enhanced Achievements Section */
-        .achievements-section {
-            width: 100%;
-            max-width: 900px;
-            padding: var(--spacing-xl);
-            border-radius: var(--border-radius-lg);
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-medium);
-            margin: var(--spacing-lg) 0;
-        }
-
-        .achievements-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: var(--spacing-lg);
-            color: var(--text-primary);
-            text-align: center;
-        }
-
-        .achievements-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: var(--spacing-md);
-        }
-
-        .achievement-item {
-            text-align: center;
-            padding: var(--spacing-md);
-            border-radius: var(--border-radius);
-            background: var(--bg-secondary);
-            transition: var(--transition-medium);
-            cursor: pointer;
-        }
-
-        .achievement-item:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-medium);
-        }
-
-        .achievement-item.unlocked {
-            background: var(--gradient-success);
-            color: white;
-        }
-
-        .achievement-icon {
-            font-size: 2rem;
-            margin-bottom: var(--spacing-xs);
-        }
-
-        .achievement-name {
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        /* Memories Section */
-        .memories-section {
-            width: 100%;
-            max-width: 900px;
-            padding: var(--spacing-xl);
-            border-radius: var(--border-radius-lg);
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-medium);
-            margin: var(--spacing-lg) 0;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 0.5s forwards;
-        }
-
-        .memories-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: var(--spacing-lg);
-            color: var(--text-primary);
-            text-align: center;
-            background: var(--gradient-primary);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .memories-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--spacing-lg);
-        }
-
-        .memory-card {
-            background: rgba(110, 77, 77, 0.445);
-            border-radius: var(--border-radius);
-            padding: var(--spacing-lg);
-            border: 1px solid var(--border-color);
-            transition: var(--transition-medium);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .memory-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--gradient-primary);
-            transform: scaleX(0);
-            transition: var(--transition-medium);
-        }
-
-        .memory-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .memory-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-heavy);
-            border-color: var(--text-muted);
-        }
-
-        .memory-icon {
-            font-size: 2rem;
-            margin-bottom: var(--spacing-sm);
-            display: block;
-        }
-
-        .memory-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: var(--spacing-xs);
-        }
-
-        .memory-date {
-            font-size: 0.875rem;
-            color: rgb(192, 55, 78);
-            margin-bottom: var(--spacing-sm);
-            font-weight: 500;
-        }
-
-        .memory-description {
-            font-size: 0.9375rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes numberPulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        @keyframes celebrate {
-            0%, 100% { transform: scale(1) rotate(0deg); }
-            25% { transform: scale(1.1) rotate(-5deg); }
-            75% { transform: scale(1.1) rotate(5deg); }
-        }
-
-        .number-change {
-            animation: numberPulse 0.4s ease;
-        }
-
-        .celebrate {
-            animation: celebrate 0.6s ease;
-        }
-
-        /* Staggered animation delays */
-        .counter-item:nth-child(1) { animation-delay: 0.1s; }
-        .counter-item:nth-child(2) { animation-delay: 0.2s; }
-        .counter-item:nth-child(3) { animation-delay: 0.3s; }
-        .counter-item:nth-child(4) { animation-delay: 0.4s; }
-        .counter-item:nth-child(5) { animation-delay: 0.5s; }
-        .counter-item:nth-child(6) { animation-delay: 0.6s; }
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .counter-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: var(--spacing-md);
-            }
-            
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .memories-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            :root {
-                --spacing-xs: 0.25rem;
-                --spacing-sm: 0.75rem;
-                --spacing-md: 1rem;
-                --spacing-lg: 1.5rem;
-                --spacing-xl: 2rem;
-            }
-            
-            .container {
-                padding: var(--spacing-md);
-            }
-            
-            .counter-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: var(--spacing-sm);
-            }
-            
-            .counter-item {
-                padding: var(--spacing-lg) var(--spacing-md);
-            }
-            
-            .counter-number {
-                font-size: clamp(1.5rem, 6vw, 2.5rem);
-            }
-            
-            .header {
-                flex-direction: column;
-                align-items: center;
-                gap: var(--spacing-md);
-            }
-            
-            .controls {
-                flex-direction: column;
-                gap: var(--spacing-sm);
-            }
-            
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .timezone-grid,
-            .birthday-grid {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .language-switcher {
-                position: relative;
-                top: auto;
-                right: auto;
-                margin-bottom: var(--spacing-md);
-            }
-
-            .achievements-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .memories-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .counter-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: var(--spacing-xs);
-            }
-            
-            .counter-item {
-                padding: var(--spacing-md) var(--spacing-sm);
-            }
-            
-            .counter-number {
-                font-size: clamp(1.25rem, 8vw, 2rem);
-                margin-bottom: 0.25rem;
-            }
-            
-            .counter-label {
-                font-size: 0.75rem;
-            }
-            
-            .birthday-section,
-            .timezone-section {
-                padding: var(--spacing-lg);
-                margin: var(--spacing-md) 0;
-            }
-
-            .achievements-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        /* Performance optimizations */
-        .counter-item,
-        .stat-item,
-        .language-switcher,
-        .notification {
-            will-change: transform;
-        }
-
-        /* Reduced motion preferences */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-        /* 2025 Review Modal - Enhanced to match site style perfectly */
-        .review-2025-modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(18px);
-            background: rgba(12, 8, 14, 0.65);
-            z-index: 9999;
-            animation: fadeIn 0.4s ease forwards;
-        }
-        
-        .review-wrapper {
-            width: 92%;
-            max-width: 780px;
-            max-height: 88vh;
-            overflow-y: auto;
-            padding: var(--spacing-xl);
-            border-radius: var(--border-radius-lg);
-            background: var(--bg-secondary);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            box-shadow: var(--shadow-heavy), 0 0 35px rgba(255, 0, 90, 0.25);
-            position: relative;
-        
-            background-image:
-                radial-gradient(circle at top left, rgba(255, 140, 140, 0.07), transparent 60%),
-                radial-gradient(circle at bottom right, rgba(112, 55, 165, 0.07), transparent 60%);
-                
-            animation: modalZoomIn 0.7s cubic-bezier(.16,.83,.45,1) forwards;
-        }
-        
-        /* Header Title Animation */
-        .review-heading {
-            font-size: 2rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: var(--spacing-lg);
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: softGlowPulse 3s ease-in-out infinite;
-        }
-        
-        @keyframes softGlowPulse {
-            0%, 100% {
-                filter: drop-shadow(0 0 6px rgba(255, 75, 155, 0.45));
-            }
-            50% {
-                filter: drop-shadow(0 0 9px rgba(255, 75, 155, 0.8));
-            }
-        }
-        
-        /* Sections */
-        .review-section {
-            opacity: 0;
-            margin-bottom: var(--spacing-xl);
-            padding: var(--spacing-md) var(--spacing-lg);
-            background: rgba(0, 0, 0, 0.15);
-            border-radius: var(--border-radius);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            animation: sectionFadeUp 0.65s ease forwards;
-            transition: var(--transition-medium);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .review-section::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            height: 100%;
-            width: 4px;
-            background: var(--gradient-primary);
-            opacity: 0.15;
-            transition: 0.4s ease;
-        }
-        
-        .review-section:hover::before {
-            opacity: 0.35;
-            width: 8px;
-        }
-        
-        .review-section h3 {
-            margin-bottom: var(--spacing-sm);
-            font-size: 1.25rem;
-        }
-        
-        /* Images */
-        .review-images {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        
-        .review-images img {
-            width: 135px;
-            height: auto;
-            border-radius: var(--border-radius);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: var(--shadow-light);
-            opacity: 0;
-            transform: scale(0.92);
-            animation: fadeInUp 0.6s ease forwards;
-        }
-        
-        .review-images img:hover {
-            transform: scale(1.07);
-            box-shadow: var(--shadow-medium), 0 0 15px rgba(255, 0, 90, 0.25);
-            transition: 0.3s ease;
-        }
-        
-        /* Close Button */
-        .close-review {
-            position: sticky;
-            top: 8px;
-            float: right;
-            font-size: 1.3rem;
-            padding: 6px 10px;
-            border-radius: 8px;
-            border: none;
-            color: var(--text-primary);
-            background: rgba(255, 255, 255, 0.07);
-            backdrop-filter: blur(6px);
-            cursor: pointer;
-            z-index: 100;
-            transition: var(--transition-fast);
-        }
-        
-        .close-review:hover {
-            background: rgba(255, 0, 90, 0.6);
-            transform: scale(1.13);
-        }
-        
-        /* Animations */
-        @keyframes modalZoomIn {
-            0% { opacity: 0; transform: scale(0.85) translateY(40px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); }
-        }
-        
-        @keyframes modalZoomOut {
-            0% { opacity: 1; transform: scale(1); }
-            100% { opacity: 0; transform: scale(0.88) translateY(40px); }
-        }
-        
-        @keyframes sectionFadeUp {
-            from { opacity:0; transform:translateY(40px); }
-            to { opacity:1; transform:translateY(0); }
-        }
-        
-        /* Opening class */
-        .review-2025-modal.open {
-            display: flex;
-            animation: fadeIn 0.4s ease forwards;
-        }
-        /* Islamic Theme Enhancements */
-        .islam-banner {
-            margin: 1rem auto;
-            margin-top: 1rem;
-            padding: 1px 5px;
-            border-radius: 50px;
-            text-align: center;
-            color: #fff;
-            font-size: 1rem;
-            font-weight: 700;
-            box-shadow: 0 0 18px rgba(0, 255, 180, 0.25);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Relationship APP</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="../../CSS/tel.css">
+  <link rel="shortcut icon" href="icon.png" type="image/x-icon">
 </head>
 <body>
-    <!-- Confetti Canvas -->
-    <canvas id="confetti-canvas"></canvas>
+  
+<div class="header-image">  
+  <img src="Images/hug.jpg" class="header_image-hug" alt="" onclick="hoverimagehug()">
+    <iframe data-testid="embed-iframe" class="spotify_widget" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/15kUwNphCDqIvcKbEsek7x?utm_source=generator" width="80%" height="400"   frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe><br><br></div>
+  <div class="container">
 
-    <div class="language-switcher" id="languageSwitcher">
-        <button id="switch-to-id" onclick="switchLanguage('id')" class="active">ID</button>
-        <button id="switch-to-en" onclick="switchLanguage('en')">EN</button>
+    <button class="updateBtn" id="updateBtn" onclick="checkForUpdates()">Update APP</button>
+    <button class="add" id="installBtn" onclick="installApp()">Install APP</button>
+    <h1>Our Relationship APP</h1>
+    <p>May Allah unite our hearts in goodness. 🤲💞</p>
+    <!-- Buttons Grid -->
+    <div class="button-grid">
+      <button onclick="showGallery()">💗 Our Gallery</button>
+      <button onclick="showNotes()">📙 Notes</button>
+      <button onclick="togetherSince()">🔗 Together Since</button>
+      <button onclick="ourStory()">🕰️ How We Met?</button>
+      <button onclick="toyagames()">🎮 Games</button>
     </div>
-<!-- FULLSCREEN 2025 REVIEW MODAL -->
-<div id="review2025Modal" class="review-2025-modal">
-    <div class="review-wrapper">
-        <button class="close-review" onclick="close2025Review()" id="review_close_btn">✖</button>
         
-        <h2 class="review-heading" id="review_title">🎞️ Our 2025 Review</h2>
-
-        <div class="review-section">
-            <h3 id="review_stories_title">📖 Stories Together</h3>
-            <p id="review_stories_text">Loading...</p>
-        </div>
-
-        <div class="review-section">
-            <h3 id="review_images_title">🖼️ Images</h3>
-            <div class="review-images">
-                <img src="../OurAPP/Images/hug.jpg">
-                <img src="../OurAPP/Images/Snapchat-2089046822.jpg  ">
-                <img src="../OurAPP/Images/Snapchat-457034800.jpg">
-                <img src="../OurAPP/Images/IMG_20251022_190514_703.jpg">
-                <img src="../OurAPP/Images/Snapchat-1304937913.jpg">
-                <img src="../OurAPP/Images/20250921_133048.jpg">
+    <div class="version-info" id="versionInfo">
+      <strong>Current Version:</strong> <span id="currentVersion">Loading...</span><br>
+      <strong>Local Version:</strong> <span id="localVersion">Loading...</span><br>
+      <strong>Update Status:</strong> <span id="updateAvailable">Checking...</span>
+      <div id="lastChecked" style="margin-top:6px; font-size:12px; color:#666;">Last checked: never</div>
+    </div>
+    <div id="status" class="status"></div>
+    
+    <!-- Update Modal -->
+    <div id="updateModal" class="update-modal">
+        <div class="update-content">
+            <div class="update-icon">🔄</div>
+            <h2>Update Available!</h2>
+            <p>A newer version (<span id="newVersionSpan"></span>) is available.</p>
+            <p>Current version: <span id="currentVersionSpan"></span></p>
+            
+            <div class="progress-bar" id="progressBar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            
+            <div id="updateStatus"></div>
+            
+            <div id="updateButtons">
+                <button class="update-button" onclick="performUpdate()">Update Now</button>
+                <button class="cancel-button" onclick="closeUpdateModal()">Later</button>
             </div>
         </div>
-
-        <div class="review-section">
-            <h3 id="review_adv_title">🏆 Unlocked Advancements</h3>
-            <p id="review_adv_text">Loading...</p>
-        </div>
-
     </div>
+  </div>
+
+    <!-- Notes Modal -->
+    <div id="notesModal" class="notes-modal">
+      <div class="notes-content">
+        <span class="closeNotes" onclick="closeNotes()">✖ Close</span>
+        <h2>Our Notes 📙</h2>
+      
+        <div class="add-note">
+          <input id="noteName" placeholder="Your name" />
+          <textarea id="noteText" placeholder="Write something sweet..."></textarea>
+          <button onclick="addNote()">➕ Add Note</button>
+        </div>
+      
+        <div id="notesList" class="notes-list">
+          <p>Loading notes...</p>
+        </div>
+      </div>
+    </div>
+
+
+
+  <!-- Gallery Modal -->
+  <div id="galleryModal">
+    <div id="galleryContent">
+      <span id="closeGallery" onclick="closeGallery()">✖ Close</span>
+      <h2>Our Moments</h2>
+      
+      <!-- Gallery Controls -->
+      <div id="galleryControls">
+        <button onclick="toggleSlideshow()" id="slideshowBtn">▶️ Slideshow</button>
+        <button onclick="shuffleGallery()">🔀 Shuffle</button>
+        <button onclick="showFavorites()">⭐ Favorites</button>
+        <button onclick="sortByDate()">📅 Sort by Date</button>
+        <button onclick="toggleGridView()">🔲 Grid View</button>
+      </div>
+
+      <!-- Search Bar -->
+      <div id="searchSection">
+        <input type="text" id="searchInput" placeholder="Search photos by memory..." oninput="searchPhotos()">
+        <button onclick="clearSearch()">❌</button>
+      </div>
+
+      <!-- Filter Options -->
+      <div id="filterSection">
+        <select id="yearFilter" onchange="filterByYear()">
+          <option value="">All Years</option>
+        </select>
+        <select id="monthFilter" onchange="filterByMonth()">
+          <option value="">All Months</option>
+          <option value="01">January</option>
+          <option value="02">February</option>
+          <option value="03">March</option>
+          <option value="04">April</option>
+          <option value="05">May</option>
+          <option value="06">June</option>
+          <option value="07">July</option>
+          <option value="08">August</option>
+          <option value="09">September</option>
+          <option value="10">October</option>
+          <option value="11">November</option>
+          <option value="12">December</option>
+        </select>
+      </div>
+
+      <div id="galleryGrid" class="grid-view">
+        <div class="photo-container">
+          <img src="Images/IMG_20260208_041428_221.jpg" alt="Gallery 1" onclick="viewFullImage(this, 0)" data-id="1" data-date="2026-02-08" data-memory="SO PRETTYYYY AAAAA">
+          <div class="photo-overlay">
+            <span class="favorite-btn" onclick="toggleFavorite(1, this)">🤍</span>
+            <span class="photo-date">Dec 18, 2025</span>
+          </div>
+        </div>
+        <div class="photo-container">
+          <img src="Images/IMG_20260118_053903_802.jpg" alt="Gallery 2" onclick="viewFullImage(this, 1)" data-id="2" data-date="2026-01-18" data-memory="You sooooo georgouss!!">
+          <div class="photo-overlay">
+            <span class="favorite-btn" onclick="toggleFavorite(2, this)">🤍</span>
+            <span class="photo-date">Dec 18, 2025</span>
+          </div>
+        </div>
+        <div class="photo-container">
+          <img src="Images/IMG_20260101_071727_627.jpg" alt="Gallery 3" onclick="viewFullImage(this, 2)" data-id="3" data-date="2026-01-01" data-memory="PICII BABYY awww">
+          <div class="photo-overlay">
+            <span class="favorite-btn" onclick="toggleFavorite(3, this)">🤍</span>
+            <span class="photo-date">Dec 18, 2025</span>
+          </div>
+        </div>
+        <div class="photo-container">
+          <img src="Images/IMG_20260124_151610_072.jpg" alt="Gallery 4" onclick="viewFullImage(this, 3)" data-id="4" data-date="2026-01-24" data-memory="SO PRETTYYYY AAAAA">
+          <div class="photo-overlay">
+            <span class="favorite-btn" onclick="toggleFavorite(4, this)">🤍</span>
+            <span class="photo-date">Dec 18, 2025</span>
+          </div>
+        </div>
+        <div class="photo-container">
+          <img src="Images/IMG_20251229_091003_905.jpg" alt="Gallery 5" onclick="viewFullImage(this, 4)" data-id="5" data-date="2025-12-29" data-memory="WOWW">
+          <div class="photo-overlay">
+            <span class="favorite-btn" onclick="toggleFavorite(5, this)">🤍</span>
+            <span class="photo-date">Dec 29, 2025</span>
+          </div>
+        </div>
+        <div class="photo-container">
+          <img src="Images/Locket_1770712226295_95.jpg" alt="Gallery 6" onclick="viewFullImage(this, 5)" data-id="6" data-date="2025-12-02" data-memory="Sigmaa🗿">
+          <div class="photo-overlay">
+            <span class="favorite-btn" onclick="toggleFavorite(6, this)">🤍</span>
+            <span class="photo-date">Dec 02, 2025</span>
+          </div>
+        </div>
+        <div class="photo-container">
+          <img src="Images/Locket_1770712183615_38.jpg" alt="Gallery 7" onclick="viewFullImage(this, 6)" data-id="7" data-date="2025-12-02" data-memory="Banana">
+          <div class="photo-overlay">
+            <span class="favorite-btn" onclick="toggleFavorite(7, this)">🤍</span>
+            <span class="photo-date">Dec 02, 2025</span>
+          </div>
+        </div>
+        <div class="photo-container">
+          <img src="Images/Locket_1770712232162_71.jpg" alt="Gallery 8" onclick="viewFullImage(this, 7)" data-id="8" data-date="2025-12-02" data-memory="Bro so calm">
+          <div class="photo-overlay">
+            <span class="favorite-btn" onclick="toggleFavorite(8, this)">🤍</span>
+            <span class="photo-date">Dec 02, 2025</span>
+          </div>
+        </div>
+        <div class="photo-container">
+          <img src="Images/20251202_164831.jpg" alt="Gallery 9" onclick="viewFullImage(this, 8)" data-id="9" data-date="2025-12-02" data-memory="BALDDD!!">
+          <div class="photo-overlay">
+            <span class="favorite-btn" onclick="toggleFavorite(9, this)">🤍</span>
+            <span class="photo-date">Dec 02, 2025</span>
+          </div>
+        </div>
+        <div class="photo-container">
+          <img src="Images/IMG_20251113_171715_312.jpg" alt="Gallery 10" onclick="viewFullImage(this, 9)" data-id="10" data-date="2025-11-13" data-memory="Good times with friendos">
+          <div class="photo-overlay">
+            <span class="favorite-btn" onclick="toggleFavorite(10, this)">🤍</span>
+            <span class="photo-date">Nov 13, 2025</span>
+          </div>
+        </div>
+        <div class="photo-container">
+          <img src="Images/IMG_20251127_125421_253.jpg" alt="Gallery 11" onclick="viewFullImage(this, 10)" data-id="11" data-date="2025-11-27" data-memory="Beautiful morning">
+          <div class="photo-overlay">
+            <span class="favorite-btn" onclick="toggleFavorite(11, this)">🤍</span>
+            <span class="photo-date">Nov 27, 2025</span>
+          </div>
+        </div>
+        <div class="photo-container">
+          <img src="Images/20251126_184030.jpg" alt="Gallery 12" onclick="viewFullImage(this, 11)" data-id="12" data-date="2025-11-26" data-memory="Beautiful morning">
+          <div class="photo-overlay">
+            <span class="favorite-btn" onclick="toggleFavorite(12, this)">🤍</span>
+            <span class="photo-date">Nov 26, 2025</span>
+          </div>
+        </div>
+        <div class="photo-container">
+          <img src="Images/IMG_20250826_123404_967.jpg" alt="Gallery 13" onclick="viewFullImage(this, 12)" data-id="13" data-date="2025-08-26" data-memory="Lunch date adventure">
+          <div class="photo-overlay">
+            <span class="favorite-btn" onclick="toggleFavorite(13, this)">🤍</span>
+            <span class="photo-date">Aug 26, 2025</span>
+          </div>
+        </div>
+        <div class="photo-container">
+          <img src="Images/20241203_190719.jpg" alt="Gallery 14" onclick="viewFullImage(this, 13)" data-id="14" data-date="2024-12-03" data-memory="Winter evening memories">
+          <div class="photo-overlay">
+            <span class="favorite-btn" onclick="toggleFavorite(14, this)">🤍</span>
+            <span class="photo-date">Dec 3, 2024</span>
+          </div>
+        </div>
+        <div class="photo-container">
+          <img src="Images/IMG_20250907_102637_959.jpg" alt="Gallery 15" onclick="viewFullImage(this, 14)" data-id="15" data-date="2025-09-07" data-memory="Weekend getaway">
+          <div class="photo-overlay">
+            <span class="favorite-btn" onclick="toggleFavorite(15, this)">🤍</span>
+            <span class="photo-date">Sep 7, 2025</span>
+          </div>
+        </div>
+        <div class="photo-container">
+          <img src="Images/20250921_133048.jpg" alt="Gallery 16" onclick="viewFullImage(this, 15)" data-id="16" data-date="2025-09-21" data-memory="Perfect Saturday">
+          <div class="photo-overlay">
+            <span class="favorite-btn" onclick="toggleFavorite(16, this)">🤍</span>
+            <span class="photo-date">Sep 21, 2025</span>
+          </div>
+        </div>
+        <div class="photo-container">
+          <img src="Images/IMG_20250824_100853_542.jpg" alt="Gallery 17" onclick="viewFullImage(this, 16)" data-id="17" data-date="2025-08-24" data-memory="Smile night">
+          <div class="photo-overlay">
+            <span class="favorite-btn" onclick="toggleFavorite(17, this)">🤍</span>
+            <span class="photo-date">Aug 24, 2025</span>
+          </div>
+        </div>
+        <div class="photo-container">
+          <img src="Images/IMG_20250921_135644_809(1).jpg" alt="Gallery 18" onclick="viewFullImage(this, 17)" data-id="18" data-date="2025-09-21" data-memory="Selfie timee!">
+          <div class="photo-overlay">
+            <span class="favorite-btn" onclick="toggleFavorite(18, this)">🤍</span>
+            <span class="photo-date">Sep 21, 2025</span>
+          </div>
+        </div>
+        <div class="photo-container">
+          <img src="Images/IMG_20251001_112413_438.jpg" alt="Gallery 19" onclick="viewFullImage(this, 18)" data-id="19" data-date="2025-10-01" data-memory="Beautiful Princess">
+          <div class="photo-overlay">
+            <span class="favorite-btn" onclick="toggleFavorite(19, this)">🤍</span>
+            <span class="photo-date">Oct 01, 2025</span>
+          </div>
+        </div>
+        <div class="photo-container">
+          <img src="Images/20251015.jpg" alt="Gallery 20" onclick="viewFullImage(this, 19)" data-id="20" data-date="2025-10-15" data-memory="Mewing master!">
+          <div class="photo-overlay">
+            <span class="favorite-btn" onclick="toggleFavorite(20, this)">🤍</span>
+            <span class="photo-date">Oct 15, 2025</span>
+          </div>
+        </div>
+        <div class="photo-container">
+          <img src="Images/20251015_2.jpg" alt="Gallery 21" onclick="viewFullImage(this, 20)" data-id="21" data-date="2025-10-25" data-memory="PRO GIRL">
+          <div class="photo-overlay">
+            <span class="favorite-btn" onclick="toggleFavorite(21, this)">🤍</span>
+            <span class="photo-date">Oct 25, 2025</span>
+          </div>
+        </div>
+        <div class="photo-container">
+          <img src="Images/Snapchat-2089046822.jpg" alt="Gallery 22" onclick="viewFullImage(this, 21)" data-id="22" data-date="2025-10-24" data-memory="Bro said: 🙄">
+          <div class="photo-overlay">
+            <span class="favorite-btn" onclick="toggleFavorite(22, this)">🤍</span>
+            <span class="photo-date">Oct 24, 2025</span>
+          </div>
+        </div>
+        <div class="photo-container">
+          <img src="Images/Snapchat-2081468546.jpg" alt="Gallery 23" onclick="viewFullImage(this, 22)" data-id="23" data-date="2025-10-25" data-memory="Sayangkuuuu!!">
+          <div class="photo-overlay">
+            <span class="favorite-btn" onclick="toggleFavorite(23, this)">🤍</span>
+            <span class="photo-date">Oct 25, 2025</span>
+          </div>
+        </div>
+        <div class="photo-container">
+          <img src="Images/Snapchat-1900455475.jpg" alt="Gallery 24" onclick="viewFullImage(this, 23)" data-id="24" data-date="2025-10-25" data-memory="#HANDSOME-BOY">
+          <div class="photo-overlay">
+            <span class="favorite-btn" onclick="toggleFavorite(24, this)">🤍</span>
+            <span class="photo-date">Oct 25, 2025</span>
+          </div>
+        </div>
+        <div class="photo-container">
+          <img src="Images/Snapchat-457034800.jpg" alt="Gallery 25" onclick="viewFullImage(this, 24)" data-id="25" data-date="2025-10-21" data-memory="PRO GIRL">
+          <div class="photo-overlay">
+            <span class="favorite-btn" onclick="toggleFavorite(25, this)">🤍</span>
+            <span class="photo-date">Oct 21, 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Photo Stats -->
+      <div id="photoStats">
+        <span id="photoCount">7 photos</span> • 
+        <span id="favoriteCount">0 favorites</span> • 
+        <span id="dateRange">2024 - 2025</span>
+      </div>
+    </div>
+  </div>
+
+<!-- Full Image Modal -->
+<div id="fullImageModal">
+  <div id="fullImageContent">
+    <span onclick="closeFullImage()">✖ Close</span>
+    <img id="fullImage" src="" alt="" onclick="toggleFullImageControls()"> <!-- CLICK HANDLER -->
+
+    <!-- Photo Info Panel -->
+    <div id="photoInfo" class="hidden-controls">
+      <h3 id="photoTitle">Photo Title</h3>
+      <p id="photoMemory">Memory description</p>
+      <span id="photoDate">Date</span>
+      <button onclick="toggleFullscreenFavorite()" id="fullFavoriteBtn">🤍 Add to Favorites</button>
+    </div>
+
+    <!-- Enhanced Navigation -->
+    <div id="imageNavigation" class="hidden-controls">
+      <button onclick="previousImage()" id="prevBtn">‹ Previous</button>
+      <span id="imageCounter">1 / 7</span>
+      <button onclick="nextImage()" id="nextBtn">Next ›</button>
+    </div>
+
+    <!-- Zoom and Pan Controls -->
+    <div id="zoomControls" class="hidden-controls">
+      <button onclick="zoomIn()">🔍+</button>
+      <button onclick="zoomOut()">🔍-</button>
+      <button onclick="resetZoom()">↻ Reset</button>
+      <button onclick="downloadPhoto()">⬇️ Download</button>
+      <button onclick="toggleFullscreen()">⛶ Fullscreen</button>
+    </div>
+  </div>
 </div>
 
-
-
-    <div class="container">
-        <div class="header">
-            <div class="islam-banner">
-                The only way
-                <br>Alhamdulillah🤲✨
-            </div>
-            <div></div>
-        </div>
-        <button class="toggle-button" onclick="open2025Review()" id="title_rev">🎞️ 2025 Review</button>
-
-        <h1 class="title" id="title_friendship">💕 Our Relationship</h1>
-        <div class="milestone" id="milestone">🌱 Growing friendship!</div>
-
-        <div class="counter-grid">
-            <div class="counter-item" onclick="copyToClipboard('years')">
-                <span class="counter-number" id="years">0</span>
-                <span class="counter-label" id="years_label">Years</span>
-            </div>
-            <div class="counter-item" onclick="copyToClipboard('months')">
-                <span class="counter-number" id="months">0</span>
-                <span class="counter-label" id="months_label">Months</span>
-            </div>
-            <div class="counter-item" onclick="copyToClipboard('days')">
-                <span class="counter-number" id="days">0</span>
-                <span class="counter-label" id="days_label">Days</span>
-            </div>
-            <div class="counter-item" onclick="copyToClipboard('hours')">
-                <span class="counter-number" id="hours">0</span>
-                <span class="counter-label" id="hours_label">Hours</span>
-            </div>
-            <div class="counter-item minutes-item minutes-hidden" onclick="copyToClipboard('minutes')">
-                <span class="counter-number" id="minutes">0</span>
-                <span class="counter-label" id="minutes_label">Minutes</span>
-            </div>
-            <div class="counter-item seconds-item seconds-hidden" onclick="copyToClipboard('seconds')">
-                <span class="counter-number" id="seconds">0</span>
-                <span class="counter-label" id="seconds_label">Seconds</span>
-            </div>
-        </div>
-
-        <div class="description">
-            Friend since <span class="date-highlight" id="friendship-date">March 14, 2025</span>, Toyeee & Toyaaa 😏<br>
-            <span class="date-highlight" id="friendship-date">August 23, 2025</span> - Lovers💞
-        </div>
-
-        <div class="controls">
-            <button class="toggle-button" onclick="toggleTimeUnits()">
-                <span id="show_more_btn">⏰ More</span>
-            </button>
-            <button class="toggle-button" onclick="toggleStats()">
-                <span id="show_stats_btn">📊 Stats</span>
-            </button>
-            <button class="toggle-button" onclick="toggleAchievements()">
-                <span id="show_achievements_btn">🏆 Achievements</span>
-            </button>
-            <button class="toggle-button" onclick="toggleMemories()">
-                <span id="show_memories_btn">💭 Memories</span>
-            </button>
-        </div>
-
-        <div class="stats-grid stats-hidden" id="stats-section">
-            <div class="stat-item">
-                <div class="stat-label" id="totaldays_label">Total Days☀️</div>
-                <div class="stat-value" id="total-days">0</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-label" id="totalhours_label">Total Hours🕰️</div>
-                <div class="stat-value" id="total-hours">0</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-label" id="totalweeks_label">Total Weeks📅</div>
-                <div class="stat-value" id="total-weeks">0</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-label" id="goalprogress_label">Goal Progress (1000 Days)🥇</div>
-                <div class="stat-value" id="goal-progress">0%</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-label" id="nextfriendiversary_label">Next Anniversary💗</div>
-                <div class="stat-value" id="anniversary-countdown">--</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-label">Lover since</div>
-                <div class="stat-value" id="loversince-countdown">--</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-label" id="totalminutes_label">Total Minutes</div>
-                <div class="stat-value" id="total-minutes">0</div>
-            </div>
-        </div>
-
-        <div class="achievements-section stats-hidden" id="achievements-section">
-            <h2 class="achievements-title">🏆 Friendship Achievements</h2>
-            <div class="achievements-grid" id="achievements-grid">
-                <!-- Achievements will be populated by JavaScript -->
-            </div>
-        </div>
-
-        <div class="memories-section stats-hidden" id="memories-section">
-            <h2 class="memories-title" id="memories_title">💭 Memories Together</h2>
-            <div class="memories-grid" id="memories-grid">
-                <!-- Memories will be populated by JavaScript -->
-            </div>
-        </div>
-
-        <div class="birthday-section">
-            <h2 class="birthday-title">🎂 Birthday Countdowns</h2>
-            <div class="birthday-grid">
-                <div class="stat-item">
-                    <div class="stat-label" id="toyeeesbirthday_label">Toyeee's Birthday</div>
-                    <div class="stat-value" id="birthday-countdown_toyeee">--</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-label" id="toyaaasbirthday_label">Toyaaa's Birthday</div>
-                    <div class="stat-value" id="birthday-countdown_toyaaa">--</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="timezone-section">
-            <h2 class="timezone-title" id="ourtimezone_label">🌍 Our Timezones</h2>
-            <div class="timezone-grid">
-                <div class="timezone-item">
-                    <div class="timezone-label">Toyeee's Time </div>
-                    <div class="timezone-value" id="friend-time">--:--</div>
-                </div>
-                <div class="timezone-item">
-                    <div class="timezone-label">Toyaaa's Time </div>
-                    <div class="timezone-value" id="your-time">--:--</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="notification" id="notification"></div>
-
-        <p style="text-align: center; margin-top: 2rem; color: var(--text-secondary);">
-            💌 Other features: 
-            <br>    
-            <a href="../notes/">Leave a note</a> | 
-            <a href="#" onclick="exportStats()">📊 Export Stats</a> | 
-            <a href="#" onclick="shareLink()">🔗 Share</a>
-        </p>
+  <!-- Slideshow Modal -->
+  <div id="slideshowModal">
+    <div id="slideshowContent">
+      <span onclick="stopSlideshow()">✖ Close</span>
+      <img id="slideshowImage" src="" alt="">
+      <div id="slideshowInfo">
+        <h3 id="slideshowTitle">Photo Title</h3>
+        <p id="slideshowMemory">Memory</p>
+      </div>
+      <div id="slideshowControls">
+        <button onclick="pauseSlideshow()" id="pauseBtn">⏸️ Pause</button>
+        <button onclick="resumeSlideshow()" id="playBtn" style="display:none">▶️ Play</button>
+        <select id="speedControl" onchange="changeSpeed()">
+          <option value="1000">Fast (1s)</option>
+          <option value="3000" selected>Normal (3s)</option>
+          <option value="5000">Slow (5s)</option>
+        </select>
+      </div>
     </div>
+  </div>
 
-    <script>
-        // Configuration
-        const CONFIG = {
-            startDate: new Date('2025-03-14T00:00:00'),
-            friendshipGoalDays: 1000,
-            toyeeeBirthday: { month: 1, day: 15 }, // February = 15
+  <style>
+    /* Gallery Controls */
+    #galleryControls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 15px 0;
+      justify-content: center;
+    }
 
-            toyaaaBirthday: { month: 7, day: 13 }, // July 13
-            timezones: {
-                toyeee: 'Asia/Jakarta',
-                toyaaa: 'Europe/Bratislava'
-            }
+    #galleryControls button {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 20px;
+      color: rgb(182, 55, 55);
+      cursor: pointer;
+      font-size: 12px;
+      transition: transform 0.2s;
+    }
+
+    #fullImageModal:fullscreen #fullImage {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    #galleryControls button:hover {
+      transform: scale(1.05);
+    }
+
+    /* Search and Filter */
+    #searchSection {
+      display: flex;
+      margin: 10px 0;
+      gap: 5px;
+    }
+
+    #searchInput {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 15px;
+    }
+
+    #filterSection {
+      display: flex;
+      gap: 10px;
+      margin: 10px 0;
+      justify-content: center;
+    }
+
+    #filterSection select {
+      padding: 5px 10px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+    }
+
+    /* Enhanced Gallery Grid */
+    .photo-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      transition: transform 0.3s;
+    }
+    .hidden-controls {
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+    .show-controls {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+
+    .photo-container:hover {
+      transform: scale(1.03);
+    }
+
+    .photo-container img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .photo-overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      background: linear-gradient(transparent 60%, rgba(0,0,0,0.7));
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 10px;
+    }
+
+    .photo-container:hover .photo-overlay {
+      opacity: 1;
+    }
+
+    .favorite-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 20px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .favorite-btn:hover {
+      transform: scale(1.2);
+    }
+
+    .favorite-btn.favorited {
+      color: #ff6b6b;
+    }
+
+    .photo-date {
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    /* Grid Views */
+    .grid-view {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+    .list-view {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .list-view .photo-container {
+      display: flex;
+      align-items: center;
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 15px;
+    }
+
+    .list-view img {
+      width: 100px;
+      height: 100px;
+      margin-right: 15px;
+    }
+
+    /* Photo Stats */
+    #photoStats {
+      text-align: center;
+      margin-top: 20px;
+      padding: 10px;
+      background: rgba(0,0,0,0.05);
+      border-radius: 10px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    /* Full Image Enhancements */
+    #fullImageModal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      z-index: 1001;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #fullImageContent {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+      text-align: center;
+    }
+
+    #fullImage {
+      max-width: 100%;
+      max-height: 70vh;
+      object-fit: contain;
+      transition: transform 0.3s;
+      cursor: grab;
+    }
+
+    #fullImage:active {
+      cursor: grabbing;
+    }
+
+    #photoInfo {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      padding: 15px;
+      border-radius: 10px;
+      margin: 15px 0;
+      color: white;
+    }
+
+    #zoomControls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    #zoomControls button {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      cursor: pointer;
+    }
+
+    #imageNavigation {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    #imageCounter {
+      color: white;
+      font-weight: bold;
+      min-width: 50px;
+    }
+
+    /* Slideshow */
+    #slideshowModal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      z-index: 1002;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #slideshowContent {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #slideshowImage {
+      max-width: 90%;
+      max-height: 70%;
+      object-fit: contain;
+    }
+
+    #slideshowInfo {
+      position: absolute;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      color: white;
+      background: rgba(0,0,0,0.7);
+      padding: 20px;
+      border-radius: 15px;
+    }
+
+    #slideshowControls {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    #slideshowControls button, #slideshowControls select {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 25px;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      cursor: pointer;
+    }
+    /* Responsive */
+    @media (max-width: 768px) {
+      .grid-view {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 10px;
+      }
+      
+      #galleryControls {
+        gap: 5px;
+      }
+      
+      #galleryControls button {
+        padding: 6px 10px;
+        font-size: 11px;
+      }
+    }
+  </style>
+
+
+  <script>
+    let deferredPrompt;
+    const installBtn = document.getElementById('installBtn');
+    const updateBtn = document.getElementById('updateBtn');
+    let currentImageIndex = 0;
+    let allPhotos = [];
+    let filteredPhotos = [];
+    let favorites = JSON.parse(localStorage.getItem('photoFavorites') || '[]');
+    let isGridView = true;
+    let zoomLevel = 1;
+    let slideshowInterval;
+    let isSlideshow = false;
+
+    // Initialize gallery
+    function initializeGallery() {
+      allPhotos = Array.from(document.querySelectorAll('.photo-container')).map((container, index) => {
+        const img = container.querySelector('img');
+        return {
+          element: container,
+          img: img,
+          id: parseInt(img.dataset.id),
+          date: img.dataset.date,
+          memory: img.dataset.memory,
+          src: img.src,
+          alt: img.alt,
+          index: index
         };
-
-        // State
-        let state = {
-            showDetailedTime: false,
-            showStats: false,
-            showAchievements: false,
-            showMemories: false,
-            currentLanguage: 'id',
-            darkMode: false,
-            lastNotifiedMilestone: localStorage.getItem('lastMilestoneNotified') || '',
-            birthdayConfettiShown: {
-                toyeee: localStorage.getItem('birthdayConfetti_toyeee') || '',
-                toyaaa: localStorage.getItem('birthdayConfetti_toyaaa') || ''
-            }
-        };
-
-        // Confetti System
-        class ConfettiSystem {
-            constructor() {
-                this.canvas = document.getElementById('confetti-canvas');
-                this.ctx = this.canvas.getContext('2d');
-                this.particles = [];
-                this.animationId = null;
-                this.isActive = false;
-                
-                this.resize();
-                window.addEventListener('resize', () => this.resize());
-            }
-
-            resize() {
-                this.canvas.width = window.innerWidth;
-                this.canvas.height = window.innerHeight;
-            }
-
-            createParticle() {
-                const colors = ['#ff6b9d', '#c44569', '#f8b500', '#ffa801', '#4b7bec', '#a55eea', '#26de81', '#20bf6b'];
-                const shapes = ['circle', 'square', 'triangle'];
-                
-                return {
-                    x: Math.random() * this.canvas.width,
-                    y: -10,
-                    vx: (Math.random() - 0.5) * 4,
-                    vy: Math.random() * 3 + 2,
-                    rotation: Math.random() * 360,
-                    rotationSpeed: (Math.random() - 0.5) * 10,
-                    size: Math.random() * 8 + 4,
-                    color: colors[Math.floor(Math.random() * colors.length)],
-                    shape: shapes[Math.floor(Math.random() * shapes.length)],
-                    opacity: 1,
-                    gravity: 0.15
-                };
-            }
-
-            drawParticle(particle) {
-                this.ctx.save();
-                this.ctx.translate(particle.x, particle.y);
-                this.ctx.rotate((particle.rotation * Math.PI) / 180);
-                this.ctx.globalAlpha = particle.opacity;
-                this.ctx.fillStyle = particle.color;
-
-                if (particle.shape === 'circle') {
-                    this.ctx.beginPath();
-                    this.ctx.arc(0, 0, particle.size, 0, Math.PI * 2);
-                    this.ctx.fill();
-                } else if (particle.shape === 'square') {
-                    this.ctx.fillRect(-particle.size / 2, -particle.size / 2, particle.size, particle.size);
-                } else if (particle.shape === 'triangle') {
-                    this.ctx.beginPath();
-                    this.ctx.moveTo(0, -particle.size);
-                    this.ctx.lineTo(-particle.size, particle.size);
-                    this.ctx.lineTo(particle.size, particle.size);
-                    this.ctx.closePath();
-                    this.ctx.fill();
-                }
-
-                this.ctx.restore();
-            }
-
-            update() {
-                this.particles = this.particles.filter(particle => {
-                    particle.vy += particle.gravity;
-                    particle.x += particle.vx;
-                    particle.y += particle.vy;
-                    particle.rotation += particle.rotationSpeed;
-                    
-                    // Fade out as particles fall
-                    if (particle.y > this.canvas.height * 0.7) {
-                        particle.opacity -= 0.01;
-                    }
-
-                    return particle.y < this.canvas.height && particle.opacity > 0;
-                });
-
-                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-                
-                this.particles.forEach(particle => {
-                    this.drawParticle(particle);
-                });
-
-                if (this.particles.length > 0 || this.isActive) {
-                    this.animationId = requestAnimationFrame(() => this.update());
-                } else {
-                    this.stop();
-                }
-            }
-
-            launch(duration = 3000) {
-                this.isActive = true;
-                const particlesPerFrame = 8;
-                let elapsed = 0;
-                const startTime = Date.now();
-
-                const addParticles = () => {
-                    elapsed = Date.now() - startTime;
-                    
-                    if (elapsed < duration) {
-                        for (let i = 0; i < particlesPerFrame; i++) {
-                            this.particles.push(this.createParticle());
-                        }
-                        setTimeout(addParticles, 50);
-                    } else {
-                        this.isActive = false;
-                    }
-                };
-
-                addParticles();
-                
-                if (!this.animationId) {
-                    this.update();
-                }
-            }
-
-            stop() {
-                this.isActive = false;
-                if (this.animationId) {
-                    cancelAnimationFrame(this.animationId);
-                    this.animationId = null;
-                }
-            }
-        }
-
-
-const translations = {
-    en: {
-        title_rev: "🎞️ Our 2025 Review",
-        review_title: "🎞️ Our 2025 Review",
-        review_stories_title: "📖 Stories Together",
-        review_stories_text: "• A Special year for both of us, this year we becamed lovers after a long friendship, and our decision was never regretten! We enjoy to spend times together, imagining about the far future, being crazy and clingy for each other, our love is unconditional! Our relationship is not just a relationship but a story what never ends, when we learn to be patient for each other, even if our distance is far, but one day everything will be the best! I really amazed since i have my sayangg, i can't get my eyes off from her, and anytime i imagine about her, my smile is endless!😽💕",
-        review_images_title: "🖼️ Images",
-        review_adv_title: "🏆 Unlocked Advancements",
-        review_adv_text: "✓ Fell in love 💗",
-        review_close_btn: "X",
-        title_friendship: "💕 Our Relationship",
-        milestone: "🌱 Growing friendship!",
-        years_label: "Years",
-        months_label: "Months", 
-        days_label: "Days",
-        hours_label: "Hours",
-        minutes_label: "Minutes",
-        seconds_label: "Seconds",
-        show_more_btn: "⏰ More",
-        show_less_btn: "⏰ Show Less",
-        show_stats_btn: "📊 Stats",
-        hide_stats_btn: "📊 Hide Stats",
-        show_achievements_btn: "🏆 Achievements",
-        hide_achievements_btn: "🏆 Hide Achievements",
-        show_memories_btn: "💭 Memories",
-        hide_memories_btn: "💭 Hide Memories",
-        memories_title: "💭 Memories Together",
-        totaldays_label: "Total Days ☀️",
-        totalhours_label: "Total Hours 🕰️",
-        totalweeks_label: "Total Weeks 📅",
-        totalminutes_label: "Total Minutes",
-        goalprogress_label: "Goal Progress (1000 Days) 🥇",
-        nextfriendiversary_label: "Next Anniversary 💗",
-        toyeeesbirthday_label: "Toyeee's Birthday",
-        toyaaasbirthday_label: "Toyaaa's Birthday",
-        ourtimezone_label: "🌍 Our Timezones",
-        achievements_title: "🏆 Friendship Achievements",
-        description: "Friend since <span class='date-highlight'>March 14, 2025</span>, Toyeee & Toyaaa 😏<br><span class='date-highlight'>August 23, 2025</span> - Lovers💞",
-        leave_note: "Leave a note",
-        export_stats: "📊 Export Stats",
-        share: "🔗 Share",
-        other_features: "💌 Other features:",
-        copied: "Copied:",
-        copy_failed: "Copy failed!",
-        unlocked: "Unlocked!",
-        locked: "Locked",
-        stats_exported: "Stats exported successfully!",
-        link_copied: "Link copied to clipboard!",
-        friendship_milestone: "🎉 Friendship Milestone!",
-        birthday_today: "🎉 Happy Birthday"
-    },
-    id: {
-        title_rev: "🎞️ Kisah Kita di 2025",
-        review_title: "🎞️ Kisah Kita di 2025",
-        review_stories_title: "📖 Cerita Indah Kita",
-        review_stories_text: "• Tahun yang sangat spesial buat kita berdua. Tahun ini kita akhirnya jadi sepasang kekasih setelah persahabatan yang panjang, dan keputusan itu sama sekali nggak pernah kita sesali! Kita selalu senang menghabiskan waktu bareng, membayangkan masa depan kita nanti, jadi bucin bareng dan saling lengket satu sama lain. Cinta kita itu tanpa syarat! Hubungan kita bukan cuma sekadar hubungan, tapi cerita yang nggak akan pernah selesai, di mana kita terus belajar sabar satu sama lain. Walaupun kita masih LDR dan jaraknya jauh, suatu hari nanti semuanya akan jadi yang terbaik! Aku bener-bener kagum sejak aku punya sayangku… aku nggak bisa lepas pandang setiap kali mikirin dia, dan setiap kali aku bayangin dia… senyumku nggak pernah habis! 😽💕",
-        review_images_title: "🖼️ Foto-foto Kita",
-        review_adv_title: "🏆 Pencapaian Cinta",
-        review_adv_text: "✓ Jatuh cinta 💗",
-        review_close_btn: "X",
-        title_friendship: "💕 Hubungan kita",
-        milestone: "🌱 Persahabatan yang tumbuh!",
-        years_label: "Tahun",
-        months_label: "Bulan",
-        days_label: "Hari", 
-        hours_label: "Jam",
-        minutes_label: "Menit",
-        seconds_label: "Detik",
-        show_more_btn: "⏰ Tampilkan Lebih",
-        show_less_btn: "⏰ Tampilkan Kurang",
-        show_stats_btn: "📊 Tampilkan Statistik",
-        hide_stats_btn: "📊 Sembunyikan Statistik",
-        show_achievements_btn: "🏆 Pencapaian",
-        hide_achievements_btn: "🏆 Sembunyikan Pencapaian",
-        show_memories_btn: "💭 Kenangan",
-        hide_memories_btn: "💭 Sembunyikan Kenangan",
-        memories_title: "💭 Kenangan Bersama",
-        totaldays_label: "Total Hari ☀️",
-        totalhours_label: "Total Jam 🕰️",
-        totalweeks_label: "Total Minggu 📅",
-        totalminutes_label: "Total Menit",
-        goalprogress_label: "Progress Target (1000 Hari) 🥇",
-        nextfriendiversary_label: "Anniversary Selanjutnya 💗",
-        toyeeesbirthday_label: "Ulang Tahun Toyeee",
-        toyaaasbirthday_label: "Ulang Tahun Toyaaa",
-        ourtimezone_label: "🌍 Zona Waktu Kita",
-        achievements_title: "🏆 Pencapaian Persahabatan",
-        description: "Berteman sejak <span class='date-highlight'>14 Maret 2025</span>, Toyeee & Toyaaa 😏<br><span class='date-highlight'>23 Agustus 2025</span> - Sepasang Kekasih💞",
-        leave_note: "Tulis catatan",
-        export_stats: "📊 Ekspor Statistik",
-        share: "🔗 Bagikan",
-        other_features: "💌 Fitur lainnya:",
-        copied: "Tersalin:",
-        copy_failed: "Gagal menyalin!",
-        unlocked: "Terbuka!",
-        locked: "Terkunci",
-        stats_exported: "Statistik berhasil diekspor!",
-        link_copied: "Tautan disalin ke papan klip!",
-        friendship_milestone: "🎉 Pencapaian Persahabatan!",
-        birthday_today: "🎉 Selamat Ulang Tahun"
-    }
-};
-
-
-        // Memories data
-        const memories = [
-            {
-                icon: '🌟',
-                title: { en: 'First Meeting', id: 'Pertemuan Pertama' },
-                date: 'March 14, 2025',
-                description: { 
-                    en: 'The day our beautiful friendship began. A moment that changed everything.',
-                    id: 'Hari dimulainya persahabatan indah kita. Momen yang mengubah segalanya.'
-                }
-            },
-            {
-                icon: '💕',
-                title: { en: 'Became Lovers', id: 'Menjadi Sepasang Kekasih' },
-                date: 'August 23, 2025',
-                description: { 
-                    en: 'The special day we officially became a couple. Our love story truly began.',
-                    id: 'Hari spesial saat kita resmi menjadi sepasang kekasih. Kisah cinta kita benar-benar dimulai.'
-                }
-            },
-            {
-                icon: '',
-                title: { en: '', id: '' },
-                date: '',
-                description: { 
-                    en: '',
-                    id: ''
-                }
-            },
-            {
-                icon: '',
-                title: { en: '', id: '' },
-                date: '',
-                description: { 
-                    en: '',
-                    id: ''
-                }
-            },
-            {
-                icon: '',
-                title: { en: '', id: '' },
-                date: '',
-                description: { 
-                    en: '',
-                    id: ''
-                }
-            },
-            {
-                icon: '',
-                title: { en: '', id: '' },
-                date: '',
-                description: { 
-                    en: '',
-                    id: ''
-                }
-            }
-        ];
-
-        // Achievements system
-        const achievements = [
-            { id: 'first_week', icon: '✨', name: 'First Week', days: 7, name_id: 'Minggu Pertama' },
-            { id: 'first_month', icon: '🥳', name: 'First Month', days: 30, name_id: 'Bulan Pertama' },
-            { id: 'fifty_days', icon: '🎁', name: '50 Days', days: 50, name_id: '50 Hari' },
-            { id: 'hundred_days', icon: '💫', name: '100 Days', days: 100, name_id: '100 Hari' },
-            { id: 'hundred_days', icon: '💞', name: 'IN LOVE', days: 100, name_id: 'Hubungan kita' },
-            { id: 'half_year', icon: '🌟', name: '6 Months', days: 180, name_id: '6 Bulan' },
-            { id: 'one_year', icon: '🎉', name: '1 Year', days: 365, name_id: '1 Tahun' },
-            { id: 'five_hundred', icon: '🏆', name: '500 Days', days: 500, name_id: '500 Hari' },
-            { id: 'two_years', icon: '👑', name: '2 Years', days: 730, name_id: '2 Tahun' },
-            { id: 'thousand_days', icon: '💎', name: '1000 Days', days: 1000, name_id: '1000 Hari' }
-        ];
-
-        // Utility Functions
-        function getElement(id) {
-            return document.getElementById(id);
-        }
-
-        function formatNumber(num) {
-            return num.toLocaleString();
-        }
-
-        function showNotification(message, type = 'success') {
-            const notification = getElement('notification');
-            notification.textContent = message;
-            notification.className = `notification show ${type}`;
-
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 4000);
-        }
-
-        function sendSystemNotification(title, body) {
-            if ('Notification' in window && Notification.permission === 'granted') {
-                new Notification(title, {
-                    body: body,
-                    icon: 'favicon.ico'
-                });
-            }
-        }
-
-        // Language Functions
-        function switchLanguage(lang) {
-            state.currentLanguage = lang;
-            
-            // Update language switcher
-            const switcher = getElement('languageSwitcher');
-            switcher.className = `language-switcher ${lang}`;
-            
-            document.querySelectorAll('.language-switcher button').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            getElement(`switch-to-${lang}`).classList.add('active');
-
-            // Apply translations
-            const texts = translations[lang];
-            Object.keys(texts).forEach(key => {
-                const element = getElement(key);
-                if (element) {
-                    element.textContent = texts[key];
-                }
-            });
-
-            updateAchievementsDisplay();
-            updateMemoriesDisplay();
-            localStorage.setItem('preferredLanguage', lang);
-        }
-
-
-        // Toggle Functions
-        function toggleTimeUnits() {
-            const minutesItem = document.querySelector('.minutes-item');
-            const secondsItem = document.querySelector('.seconds-item');
-            const buttonText = getElement('show_more_btn');
-
-            state.showDetailedTime = !state.showDetailedTime;
-
-            if (state.showDetailedTime) {
-                minutesItem.classList.remove('minutes-hidden');
-                secondsItem.classList.remove('seconds-hidden');
-                buttonText.textContent = state.currentLanguage === 'en' ? '⏰ Show Less' : '⏰ Tampilkan Kurang';
-            } else {
-                minutesItem.classList.add('minutes-hidden');
-                secondsItem.classList.add('seconds-hidden');
-                buttonText.textContent = state.currentLanguage === 'en' ? '⏰ Show More' : '⏰ Tampilkan Lebih';
-            }
-        }
-
-        function toggleStats() {
-            const statsSection = getElement('stats-section');
-            const buttonText = getElement('show_stats_btn');
-
-            state.showStats = !state.showStats;
-
-            if (state.showStats) {
-                statsSection.classList.remove('stats-hidden');
-                buttonText.textContent = state.currentLanguage === 'en' ? '📊 Hide Stats' : '📊 Sembunyikan Statistik';
-            } else {
-                statsSection.classList.add('stats-hidden');
-                buttonText.textContent = state.currentLanguage === 'en' ? '📊 Show Stats' : '📊 Tampilkan Statistik';
-            }
-        }
-
-        function toggleAchievements() {
-            const achievementsSection = getElement('achievements-section');
-            const buttonText = getElement('show_achievements_btn');
-
-            state.showAchievements = !state.showAchievements;
-
-            if (state.showAchievements) {
-                achievementsSection.classList.remove('stats-hidden');
-                buttonText.textContent = state.currentLanguage === 'en' ? '🏆 Hide Achievements' : '🏆 Sembunyikan Pencapaian';
-            } else {
-                achievementsSection.classList.add('stats-hidden');
-                buttonText.textContent = state.currentLanguage === 'en' ? '🏆 Achievements' : '🏆 Pencapaian';
-            }
-        }
-
-        function toggleMemories() {
-            const memoriesSection = getElement('memories-section');
-            const buttonText = getElement('show_memories_btn');
-
-            state.showMemories = !state.showMemories;
-
-            if (state.showMemories) {
-                memoriesSection.classList.remove('stats-hidden');
-                buttonText.textContent = state.currentLanguage === 'en' ? '💭 Hide Memories' : '💭 Sembunyikan Kenangan';
-            } else {
-                memoriesSection.classList.add('stats-hidden');
-                buttonText.textContent = state.currentLanguage === 'en' ? '💭 Memories' : '💭 Kenangan';
-            }
-        }
-
-        // Copy to clipboard
-        function copyToClipboard(unit) {
-            const value = getElement(unit).textContent;
-            const label = getElement(`${unit}_label`).textContent;
-
-            navigator.clipboard.writeText(`${value} ${label}`).then(() => {
-                showNotification(`Copied: ${value} ${label}`);
-            }).catch(() => {
-                showNotification('Copy failed!', 'error');
-            });
-        }
-
-        // Animation functions
-        function animateNumber(elementId, newValue) {
-            const element = getElement(elementId);
-            const currentValue = parseInt(element.textContent);
-
-            if (currentValue !== newValue) {
-                element.classList.add('number-change');
-                element.textContent = newValue;
-                setTimeout(() => {
-                    element.classList.remove('number-change');
-                }, 400);
-            }
-        }
-
-        function celebrateElement(elementId) {
-            const element = getElement(elementId);
-            element.classList.add('celebrate');
-            setTimeout(() => {
-                element.classList.remove('celebrate');
-            }, 600);
-        }
-
-        // Update Functions
-        function updateTimezones() {
-            const now = new Date();
-            
-            const toyaaaTime = now.toLocaleString('en-US', {
-                timeZone: CONFIG.timezones.toyaaa,
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: false
-            });
-        
-            const toyeeeTime = now.toLocaleString('en-US', {
-                timeZone: CONFIG.timezones.toyeee,
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: false
-            });
-        
-            getElement('your-time').textContent = toyaaaTime;
-            getElement('friend-time').textContent = toyeeeTime;
-        }
-
-function updateBirthdayCountdown(person) {
-    const now = new Date();
-    const todayMonth = now.getMonth();
-    const todayDate = now.getDate();
-
-    const config = CONFIG[`${person}Birthday`];
-
-    const thisYearBirthday = new Date(
-        now.getFullYear(),
-        config.month,
-        config.day
-    );
-
-    const isBirthdayToday =
-        todayMonth === config.month &&
-        todayDate === config.day;
-
-    // 🎉 Trigger confetti ONLY once per year
-    const birthdayKey = `${person}_birthday_${now.getFullYear()}`;
-    const alreadyCelebrated = localStorage.getItem(birthdayKey);
-
-    if (isBirthdayToday && !alreadyCelebrated) {
-        launchBirthdayConfetti();
-        showNotification(`🎉 Happy Birthday ${person}! 🎂`);
-        localStorage.setItem(birthdayKey, "true");
+      });
+      filteredPhotos = [...allPhotos];
+      updatePhotoStats();
+      loadFavorites();
+      populateYearFilter();
     }
 
-    // Countdown logic
-    let nextBirthday = new Date(
-        now.getFullYear(),
-        config.month,
-        config.day
-    );
+    // Before install
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      console.log('beforeinstallprompt event captured');
+      installBtn.classList.add('show');
+      updateBtn.style.display = 'none';
+    });
 
-    if (now > nextBirthday) {
-        nextBirthday.setFullYear(now.getFullYear() + 1);
-    }
+    // App installed
+    window.addEventListener('appinstalled', () => {
+      installBtn.classList.remove('show');
+      if (localStorage.getItem("newVersionAvailable") === "true") {
+        updateBtn.style.display = 'inline-block';
+      }
+    });
 
-    const diff = nextBirthday - now;
-    const daysLeft = Math.ceil(diff / (1000 * 60 * 60 * 24));
-
-    const messages = {
-        en: isBirthdayToday
-            ? `🎉 Today is ${person}'s birthday! 🎂`
-            : `${daysLeft} day${daysLeft !== 1 ? 's' : ''} left 🥳`,
-        id: isBirthdayToday
-            ? `🎉 Hari ini ulang tahun ${person}! 🎂`
-            : `${daysLeft} hari lagi 🥳`
-    };
-
-    getElement(`birthday-countdown_${person}`).textContent =
-        messages[state.currentLanguage];
-}
-
-function launchBirthdayConfetti() {
-    const duration = 5 * 1000;
-    const end = Date.now() + duration;
-
-    const colors = ['#ff4d6d', '#ff85a1', '#ffc2d1', '#ffd6ff', '#cdb4db'];
-
-    (function frame() {
-        confetti({
-            particleCount: 4,
-            angle: 60,
-            spread: 55,
-            origin: { x: 0 },
-            colors: colors
+    // Trigger install prompt
+    function installApp() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choice) => {
+          console.log(`User response: ${choice.outcome}`);
+          deferredPrompt = null;
         });
+      } else {
+        console.log('Install prompt not available');
+      }
+    }
+    function ourStory() { 
+      showModal('storyModal');
+      loadStory();
+    }
 
-        confetti({
-            particleCount: 4,
-            angle: 120,
-            spread: 55,
-            origin: { x: 1 },
-            colors: colors
+    // View Full Image
+    function viewFullImage(img, index) {
+      currentImageIndex = index;
+      const photo = filteredPhotos[index];
+      document.getElementById('fullImage').src = photo.src;
+      document.getElementById('photoTitle').textContent = photo.alt;
+      document.getElementById('photoMemory').textContent = photo.memory;
+      document.getElementById('photoDate').textContent = photo.date;
+      
+      // Update favorite button
+      const fullFavBtn = document.getElementById('fullFavoriteBtn');
+      if (favorites.includes(photo.id)) {
+        fullFavBtn.textContent = '❤️ Remove from Favorites';
+      } else {
+        fullFavBtn.textContent = '🤍 Add to Favorites';
+      }
+
+      document.getElementById('imageCounter').textContent = `${index + 1} / ${filteredPhotos.length}`;
+      document.getElementById('fullImageModal').style.display = 'flex';
+    }
+
+  </script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import {
+    getFirestore,
+    collection,
+    addDoc,
+    deleteDoc,
+    doc,
+    query,
+    orderBy,
+    onSnapshot,
+    serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  // Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyBijXs21wEd7eJVUHyyxdJwe4_3x9l6DFw",
+    authDomain: "ourapp-a86b8.firebaseapp.com",
+    projectId: "ourapp-a86b8",
+    storageBucket: "ourapp-a86b8.appspot.com",
+    messagingSenderId: "245515530451",
+    appId: "1:245515530451:web:e50f7e8639355241b2a426",
+    measurementId: "G-1W27HB1R8M"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // DOM elements
+  const notesList = document.getElementById("notesList");
+  const noteName = document.getElementById("noteName");
+  const noteText = document.getElementById("noteText");
+
+  // Show modal
+  function showNotes() {
+    document.getElementById("notesModal").style.display = "flex";
+    loadNotes();
+  }
+
+  // Close modal
+  function closeNotes() {
+    document.getElementById("notesModal").style.display = "none";
+  }
+
+  // Add note
+  async function addNote() {
+    const name = noteName.value.trim();
+    const text = noteText.value.trim();
+
+    if (!name || !text) {
+      alert("Please enter your name and a note!");
+      return;
+    }
+
+    try {
+      await addDoc(collection(db, "notes"), {
+        name,
+        text,
+        createdAt: serverTimestamp()
+      });
+      noteName.value = "";
+      noteText.value = "";
+    } catch (err) {
+      console.error("Error adding note:", err);
+    }
+  }
+
+  // Delete note
+  async function deleteNote(id) {
+    if (!confirm("Are you sure you want to delete this note?")) return;
+    try {
+      await deleteDoc(doc(db, "notes", id));
+    } catch (err) {
+      console.error("Error deleting note:", err);
+    }
+  }
+
+  // Render notes
+  function renderNotes(docs) {
+    notesList.innerHTML = "";
+    if (docs.length === 0) {
+      notesList.innerHTML = "<p>No notes yet. Be the first to write something sweet!</p>";
+      return;
+    }
+
+    docs.forEach(docSnap => {
+      const data = docSnap.data();
+      const createdAt = data.createdAt ? data.createdAt.toDate().toLocaleString() : "Just now";
+      const noteDiv = document.createElement("div");
+      noteDiv.className = "note-item";
+      noteDiv.innerHTML = `
+        <strong>${data.name}</strong> (${createdAt}): 
+        <span>${data.text}</span>
+        <button onclick="deleteNote('${docSnap.id}')">🗑️ Delete</button>
+      `;
+      notesList.appendChild(noteDiv);
+    });
+  }
+
+  // Load notes and listen for real-time updates
+  function loadNotes() {
+    const q = query(collection(db, "notes"), orderBy("createdAt", "desc"));
+    onSnapshot(q, snapshot => {
+      renderNotes(snapshot.docs);
+    });
+  }
+
+  // Expose functions globally
+  window.showNotes = showNotes;
+  window.closeNotes = closeNotes;
+  window.addNote = addNote;
+  window.deleteNote = deleteNote;
+</script>
+
+
+
+  <script src="updater.js"></script>
+  <script src="gallery-function.js"></script>
+  <script src="button-function.js"></script>  
+  <script src="../../JS/snow.js"></script>
+  <script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("service-worker.js")
+      .then(reg => {
+        console.log("[SW] Registered", reg);
+
+        // When a new SW is waiting, prompt app to update
+        if (reg.waiting) {
+          reg.waiting.postMessage({ type: "SKIP_WAITING" });
+        }
+
+        reg.addEventListener("updatefound", () => {
+          const newWorker = reg.installing;
+          newWorker.addEventListener("statechange", () => {
+            if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
+              console.log("[SW] New update available!");
+              localStorage.setItem("newVersionAvailable","true");
+              document.getElementById("updateBtn").style.display = "inline-block";
+              showUpdateModal();
+            }
+          });
         });
-
-        if (Date.now() < end) {
-            requestAnimationFrame(frame);
-        }
-    })();
+      })
+      .catch(err => console.error("[SW] Registration failed", err));
+  });
 }
+</script>
 
-
-        function updateAnniversaryCountdown() {
-            const now = new Date();
-            const anniversary = new Date(now.getFullYear(), 7, 23); // August 23 (month is zero-indexed, so 7 = August)
-            anniversary.setHours(0, 0, 0, 0);
-            if (now > anniversary) {
-                anniversary.setFullYear(now.getFullYear() + 1);
-            }
-
-            const diff = anniversary - now;
-            const daysLeft = Math.ceil(diff / (1000 * 60 * 60 * 24));
-            
-            const messages = {
-                en: `${daysLeft} days left`,
-                id: `${daysLeft} hari lagi`
-            };
-            
-            getElement('anniversary-countdown').textContent = messages[state.currentLanguage];
-        }
-
-
-        function updateGoalProgress(totalDays) {
-            const progress = Math.min(100, Math.floor((totalDays / CONFIG.friendshipGoalDays) * 100));
-            getElement('goal-progress').textContent = `${progress}%`;
-        }
-
-        function updateLoverSinceCountdown() {
-            const now = new Date();
-            const loverStart = new Date('2025-08-23T00:00:00');
-            const el = getElement('loversince-countdown');
-
-            if (!el) return;
-
-            // If the start date is in the future show countdown to start
-            if (now < loverStart) {
-            const diffMs = loverStart - now;
-            const days = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
-            const messages = {
-                en: `${days} day${days !== 1 ? 's' : ''} until lover-since`,
-                id: `${days} hari lagi`
-            };
-            el.textContent = messages[state.currentLanguage];
-            return;
-            }
-
-            // Calculate calendar difference (years, months, days) since loverStart
-            let years = now.getFullYear() - loverStart.getFullYear();
-            let months = now.getMonth() - loverStart.getMonth();
-            let days = now.getDate() - loverStart.getDate();
-
-            if (days < 0) {
-            months--;
-            const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
-            days += prevMonth.getDate();
-            }
-
-            if (months < 0) {
-            years--;
-            months += 12;
-            }
-
-            // Build a localized message but hide zero units; if all units are zero show placeholder '--'
-            if (years === 0 && months === 0 && days === 0) {
-            el.textContent = '--';
-            return;
-            }
-
-            const partsEn = [];
-            if (years > 0) partsEn.push(`${years} year${years !== 1 ? 's' : ''}`);
-            if (months > 0) partsEn.push(`${months} month${months !== 1 ? 's' : ''}`);
-            if (days > 0) partsEn.push(`${days} day${days !== 1 ? 's' : ''}`);
-
-            const partsId = [];
-            if (years > 0) partsId.push(`${years} tahun`);
-            if (months > 0) partsId.push(`${months} bulan`);
-            if (days > 0) partsId.push(`${days} hari`);
-
-            const messages = {
-            en: partsEn.join(' '),
-            id: partsId.join(' ')
-            };
-
-            el.textContent = messages[state.currentLanguage] || '--';
-        }
-
-        function updateMilestone(totalDays) {
-            const milestone = getElement('milestone');
-        
-            const milestones = [
-                { days: 2555, key: '7y', message: { en: '🚀 7 years of amazing relationship!', id: '🚀 7 tahun persahabatan luar biasa!' }},
-                { days: 2190, key: '6y', message: { en: '🌟 6 years strong!', id: '🌟 6 tahun yang kuat!' }},
-                { days: 1825, key: '5y', message: { en: '🎊 Half a decade together!', id: '🎊 Setengah dekade bersama!' }},
-                { days: 1460, key: '4y', message: { en: '✨ 4 years of relationship!', id: '✨ 4 tahun persahabatan!' }},
-                { days: 1095, key: '3y', message: { en: '🎈 3 years and going strong!', id: '🎈 3 tahun dan terus kuat!' }},
-                { days: 730, key: '2y', message: { en: '😱 Friends for 2 years, yeayyy!!', id: '😱 Berteman selama 2 tahun, yeayyy!!' }},
-                { days: 365, key: '1y', message: { en: '🎉 Over a year of relationship!', id: '🎉 Lebih dari setahun hubungan!' }},
-                { days: 300, key: '300', message: { en: '✨ Almost a full year together!', id: '✨ Hampir setahun penuh bersama!' }},
-                { days: 200, key: '200', message: { en: '🌟 200+ days and counting!', id: '🌟 200+ hari dan terus bertambah!' }},
-                { days: 100, key: '100', message: { en: '💫 Over 100 days of relationship!', id: '💫 Lebih dari 100 hari hubungan!' }},
-                { days: 50, key: '50', message: { en: '☺️ 50+ days together!', id: '☺️ 50+ hari bersama!' }},
-                { days: 30, key: '30', message: { en: '🎈 A month of friendship!', id: '🎈 Sebulan persahabatan!' }},
-                { days: 7, key: '7', message: { en: '🌸 A week of friendship!', id: '🌸 Seminggu persahabatan!' }},
-                { days: 0, key: 'start', message: { en: '🌱 Growing friendship!', id: '🌱 Persahabatan yang tumbuh!' }}
-            ];
-        
-            const currentMilestone = milestones.find(m => totalDays >= m.days);
-            
-            if (!currentMilestone) return;
-        
-            milestone.textContent = currentMilestone.message[state.currentLanguage];
-        
-            // Milestone notifications
-            if (state.lastNotifiedMilestone !== currentMilestone.key) {
-                state.lastNotifiedMilestone = currentMilestone.key;
-                localStorage.setItem('lastMilestoneNotified', currentMilestone.key);
-                
-                showNotification(currentMilestone.message[state.currentLanguage]);
-                sendSystemNotification("🎉 Friendship Milestone!", currentMilestone.message[state.currentLanguage]);
-                celebrateElement('milestone');
-            }
-        }
-
-        function updateAchievementsDisplay() {
-            const grid = getElement('achievements-grid');
-            const now = new Date();
-            const totalDays = Math.floor((now - CONFIG.startDate) / (1000 * 60 * 60 * 24));
-            
-            grid.innerHTML = '';
-            
-            achievements.forEach(achievement => {
-                const item = document.createElement('div');
-                item.className = `achievement-item ${totalDays >= achievement.days ? 'unlocked' : ''}`;
-                item.onclick = () => {
-                    const status = totalDays >= achievement.days ? 
-                        (state.currentLanguage === 'en' ? 'Unlocked!' : 'Terbuka!') : 
-                        (state.currentLanguage === 'en' ? 'Locked' : 'Terkunci');
-                    showNotification(`${achievement[state.currentLanguage === 'en' ? 'name' : 'name_id']}: ${status}`);
-                };
-                
-                item.innerHTML = `
-                    <div class="achievement-icon">${achievement.icon}</div>
-                    <div class="achievement-name">${achievement[state.currentLanguage === 'en' ? 'name' : 'name_id']}</div>
-                `;
-                
-                grid.appendChild(item);
-            });
-        }
-
-        function updateMemoriesDisplay() {
-            const grid = getElement('memories-grid');
-            
-            grid.innerHTML = '';
-            
-            memories.forEach((memory, index) => {
-                const card = document.createElement('div');
-                card.className = 'memory-card';
-                card.style.animationDelay = `${index * 0.1}s`;
-                
-                card.innerHTML = `
-                    <span class="memory-icon">${memory.icon}</span>
-                    <div class="memory-title">${memory.title[state.currentLanguage]}</div>
-                    <div class="memory-date">${memory.date}</div>
-                    <div class="memory-description">${memory.description[state.currentLanguage]}</div>
-                `;
-                
-                card.onclick = () => {
-                    showNotification(`${memory.icon} ${memory.title[state.currentLanguage]}`);
-                };
-                
-                grid.appendChild(card);
-            });
-        }
-
-        // Main counter update function
-        function updateCounter() {
-    const now = new Date();
-    const start = CONFIG.startDate;
-
-    // Calculate total difference in milliseconds
-    const diff = now - start;
-
-    // Calculate total days etc. for stats
-    const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const totalHours = Math.floor(diff / (1000 * 60 * 60));
-    const totalMinutes = Math.floor(diff / (1000 * 60));
-    const totalWeeks = Math.floor(totalDays / 7);
-
-    // Calendar-based years / months / days
-    let years = now.getFullYear() - start.getFullYear();
-    let months = now.getMonth() - start.getMonth();
-    let days = now.getDate() - start.getDate();
-
-    if (days < 0) {
-        months--;
-        const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
-        days += prevMonth.getDate();
-    }
-
-    if (months < 0) {
-        years--;
-        months += 12;
-    }
-
-    // Animate number updates
-    animateNumber('years', years);
-    animateNumber('months', months);
-    animateNumber('days', days);
-
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
-    const seconds = now.getSeconds();
-
-    animateNumber('hours', hours);
-    animateNumber('minutes', minutes);
-    animateNumber('seconds', seconds);
-
-    // Update totals & milestones
-    getElement('total-days').textContent = formatNumber(totalDays);
-    getElement('total-hours').textContent = formatNumber(totalHours);
-    getElement('total-minutes').textContent = formatNumber(totalMinutes);
-    getElement('total-weeks').textContent = formatNumber(totalWeeks);
-
-    updateMilestone(totalDays);
-    updateGoalProgress(totalDays);
-    updateAnniversaryCountdown();
-    updateLoverSinceCountdown();
-    updateBirthdayCountdown('toyeee');
-    updateBirthdayCountdown('toyaaa');
-}
-    function open2025Review() {
-        const modal = getElement("review2025Modal");
-        modal.style.display = "flex";
-        setTimeout(() => modal.classList.add("open"), 10);
-    }
-
-    function close2025Review() {
-        const modal = getElement("review2025Modal");
-        modal.classList.remove("open");
-        setTimeout(() => {
-            modal.style.display = "none";
-        }, 350); // sync with modalZoomOut animation
-    }
-
-        // Export and Share functions
-        function exportStats() {
-            const now = new Date();
-            const diff = now - CONFIG.startDate;
-            const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
-            
-            const stats = {
-                friendshipStartDate: CONFIG.startDate.toISOString().split('T')[0],
-                currentDate: now.toISOString().split('T')[0],
-                totalDays: totalDays,
-                totalHours: Math.floor(diff / (1000 * 60 * 60)),
-                totalMinutes: Math.floor(diff / (1000 * 60)),
-                totalWeeks: Math.floor(totalDays / 7),
-                goalProgress: Math.min(100, Math.floor((totalDays / CONFIG.friendshipGoalDays) * 100)),
-                unlockedAchievements: achievements.filter(a => totalDays >= a.days).length
-            };
-
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(stats, null, 2));
-            const downloadAnchor = document.createElement('a');
-            downloadAnchor.setAttribute("href", dataStr);
-            downloadAnchor.setAttribute("download", "friendship_stats.json");
-            downloadAnchor.click();
-            
-            showNotification('Stats exported successfully!');
-        }
-
-        function shareLink() {
-            const url = window.location.href;
-            if (navigator.share) {
-                navigator.share({
-                    title: 'Toyeee & Toyaaa Friendship Counter',
-                    text: 'Check out our amazing friendship journey!',
-                    url: url,
-                });
-            } else {
-                navigator.clipboard.writeText(url).then(() => {
-                    showNotification('Link copied to clipboard!');
-                });
-            }
-        }
-
-        // Initialize the application
-        function init() {
-            // Request notification permission
-            if ('Notification' in window && Notification.permission !== 'granted') {
-                Notification.requestPermission();
-            }
-
-            // Load saved preferences
-            const savedLang = localStorage.getItem('preferredLanguage') || 'id';         
-            switchLanguage(savedLang);
-
-            // Initialize hidden states
-            document.querySelector('.minutes-item').classList.add('minutes-hidden');
-            document.querySelector('.seconds-item').classList.add('seconds-hidden');
-
-            // Initialize achievements and memories
-            updateAchievementsDisplay();
-            updateMemoriesDisplay();
-
-            // Start counters
-            updateCounter();
-            updateTimezones();
-            
-            // Set intervals
-            setInterval(updateCounter, 1000);
-            setInterval(updateTimezones, 1000);
-
-        }
-
-        // Start the application when page loads
-        window.addEventListener('load', init);
-    </script>
 </body>
 </html>
