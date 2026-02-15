@@ -6,6 +6,8 @@
     <title>Our Relationship🔗💗</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <meta name="description" content="Our Beatiful and cute Relationship">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
     <style>
         /* Enhanced Modern Friendship Counter CSS */
 
@@ -67,6 +69,17 @@
             transition: var(--transition-medium);
             min-height: 100vh;
             overflow-x: hidden;
+        }
+
+        /* Confetti Canvas */
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
         }
 
         /* Container and Layout */
@@ -1012,6 +1025,9 @@
     </style>
 </head>
 <body>
+    <!-- Confetti Canvas -->
+    <canvas id="confetti-canvas"></canvas>
+
     <div class="language-switcher" id="languageSwitcher">
         <button id="switch-to-id" onclick="switchLanguage('id')" class="active">ID</button>
         <button id="switch-to-en" onclick="switchLanguage('en')">EN</button>
@@ -1199,7 +1215,8 @@
         const CONFIG = {
             startDate: new Date('2025-03-14T00:00:00'),
             friendshipGoalDays: 1000,
-            toyeeeBirthday: { month: 2, day: 14 }, // February 14
+            toyeeeBirthday: { month: 1, day: 15 }, // February = 15
+
             toyaaaBirthday: { month: 7, day: 13 }, // July 13
             timezones: {
                 toyeee: 'Asia/Jakarta',
@@ -1215,8 +1232,138 @@
             showMemories: false,
             currentLanguage: 'id',
             darkMode: false,
-            lastNotifiedMilestone: localStorage.getItem('lastMilestoneNotified') || ''
+            lastNotifiedMilestone: localStorage.getItem('lastMilestoneNotified') || '',
+            birthdayConfettiShown: {
+                toyeee: localStorage.getItem('birthdayConfetti_toyeee') || '',
+                toyaaa: localStorage.getItem('birthdayConfetti_toyaaa') || ''
+            }
         };
+
+        // Confetti System
+        class ConfettiSystem {
+            constructor() {
+                this.canvas = document.getElementById('confetti-canvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.particles = [];
+                this.animationId = null;
+                this.isActive = false;
+                
+                this.resize();
+                window.addEventListener('resize', () => this.resize());
+            }
+
+            resize() {
+                this.canvas.width = window.innerWidth;
+                this.canvas.height = window.innerHeight;
+            }
+
+            createParticle() {
+                const colors = ['#ff6b9d', '#c44569', '#f8b500', '#ffa801', '#4b7bec', '#a55eea', '#26de81', '#20bf6b'];
+                const shapes = ['circle', 'square', 'triangle'];
+                
+                return {
+                    x: Math.random() * this.canvas.width,
+                    y: -10,
+                    vx: (Math.random() - 0.5) * 4,
+                    vy: Math.random() * 3 + 2,
+                    rotation: Math.random() * 360,
+                    rotationSpeed: (Math.random() - 0.5) * 10,
+                    size: Math.random() * 8 + 4,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    shape: shapes[Math.floor(Math.random() * shapes.length)],
+                    opacity: 1,
+                    gravity: 0.15
+                };
+            }
+
+            drawParticle(particle) {
+                this.ctx.save();
+                this.ctx.translate(particle.x, particle.y);
+                this.ctx.rotate((particle.rotation * Math.PI) / 180);
+                this.ctx.globalAlpha = particle.opacity;
+                this.ctx.fillStyle = particle.color;
+
+                if (particle.shape === 'circle') {
+                    this.ctx.beginPath();
+                    this.ctx.arc(0, 0, particle.size, 0, Math.PI * 2);
+                    this.ctx.fill();
+                } else if (particle.shape === 'square') {
+                    this.ctx.fillRect(-particle.size / 2, -particle.size / 2, particle.size, particle.size);
+                } else if (particle.shape === 'triangle') {
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(0, -particle.size);
+                    this.ctx.lineTo(-particle.size, particle.size);
+                    this.ctx.lineTo(particle.size, particle.size);
+                    this.ctx.closePath();
+                    this.ctx.fill();
+                }
+
+                this.ctx.restore();
+            }
+
+            update() {
+                this.particles = this.particles.filter(particle => {
+                    particle.vy += particle.gravity;
+                    particle.x += particle.vx;
+                    particle.y += particle.vy;
+                    particle.rotation += particle.rotationSpeed;
+                    
+                    // Fade out as particles fall
+                    if (particle.y > this.canvas.height * 0.7) {
+                        particle.opacity -= 0.01;
+                    }
+
+                    return particle.y < this.canvas.height && particle.opacity > 0;
+                });
+
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                this.particles.forEach(particle => {
+                    this.drawParticle(particle);
+                });
+
+                if (this.particles.length > 0 || this.isActive) {
+                    this.animationId = requestAnimationFrame(() => this.update());
+                } else {
+                    this.stop();
+                }
+            }
+
+            launch(duration = 3000) {
+                this.isActive = true;
+                const particlesPerFrame = 8;
+                let elapsed = 0;
+                const startTime = Date.now();
+
+                const addParticles = () => {
+                    elapsed = Date.now() - startTime;
+                    
+                    if (elapsed < duration) {
+                        for (let i = 0; i < particlesPerFrame; i++) {
+                            this.particles.push(this.createParticle());
+                        }
+                        setTimeout(addParticles, 50);
+                    } else {
+                        this.isActive = false;
+                    }
+                };
+
+                addParticles();
+                
+                if (!this.animationId) {
+                    this.update();
+                }
+            }
+
+            stop() {
+                this.isActive = false;
+                if (this.animationId) {
+                    cancelAnimationFrame(this.animationId);
+                    this.animationId = null;
+                }
+            }
+        }
+
 
 const translations = {
     en: {
@@ -1266,7 +1413,8 @@ const translations = {
         locked: "Locked",
         stats_exported: "Stats exported successfully!",
         link_copied: "Link copied to clipboard!",
-        friendship_milestone: "🎉 Friendship Milestone!"
+        friendship_milestone: "🎉 Friendship Milestone!",
+        birthday_today: "🎉 Happy Birthday"
     },
     id: {
         title_rev: "🎞️ Kisah Kita di 2025",
@@ -1315,7 +1463,8 @@ const translations = {
         locked: "Terkunci",
         stats_exported: "Statistik berhasil diekspor!",
         link_copied: "Tautan disalin ke papan klip!",
-        friendship_milestone: "🎉 Pencapaian Persahabatan!"
+        friendship_milestone: "🎉 Pencapaian Persahabatan!",
+        birthday_today: "🎉 Selamat Ulang Tahun"
     }
 };
 
@@ -1570,28 +1719,89 @@ const translations = {
             getElement('friend-time').textContent = toyeeeTime;
         }
 
-        function updateBirthdayCountdown(person) {
-            const now = new Date();
-            now.setHours(0, 0, 0, 0);
-        
-            const config = CONFIG[`${person}Birthday`];
-            const birthday = new Date(now.getFullYear(), config.month - 1, config.day);
-            birthday.setHours(0, 0, 0, 0);
-        
-            if (now >= birthday) {
-                birthday.setFullYear(birthday.getFullYear() + 1);
-            }
-        
-            const diff = birthday - now;
-            const daysLeft = Math.ceil(diff / (1000 * 60 * 60 * 24));
-        
-            const messages = {
-                en: daysLeft === 0 ? `🎉 Today is ${person}'s birthday! 🎂` : `${daysLeft} day${daysLeft !== 1 ? 's' : ''} left 🥳`,
-                id: daysLeft === 0 ? `🎉 Hari ini ulang tahun ${person}! 🎂` : `${daysLeft} hari lagi 🥳`
-            };
-        
-            getElement(`birthday-countdown_${person}`).textContent = messages[state.currentLanguage];
+function updateBirthdayCountdown(person) {
+    const now = new Date();
+    const todayMonth = now.getMonth();
+    const todayDate = now.getDate();
+
+    const config = CONFIG[`${person}Birthday`];
+
+    const thisYearBirthday = new Date(
+        now.getFullYear(),
+        config.month,
+        config.day
+    );
+
+    const isBirthdayToday =
+        todayMonth === config.month &&
+        todayDate === config.day;
+
+    // 🎉 Trigger confetti ONLY once per year
+    const birthdayKey = `${person}_birthday_${now.getFullYear()}`;
+    const alreadyCelebrated = localStorage.getItem(birthdayKey);
+
+    if (isBirthdayToday && !alreadyCelebrated) {
+        launchBirthdayConfetti();
+        showNotification(`🎉 Happy Birthday ${person}! 🎂`);
+        localStorage.setItem(birthdayKey, "true");
+    }
+
+    // Countdown logic
+    let nextBirthday = new Date(
+        now.getFullYear(),
+        config.month,
+        config.day
+    );
+
+    if (now > nextBirthday) {
+        nextBirthday.setFullYear(now.getFullYear() + 1);
+    }
+
+    const diff = nextBirthday - now;
+    const daysLeft = Math.ceil(diff / (1000 * 60 * 60 * 24));
+
+    const messages = {
+        en: isBirthdayToday
+            ? `🎉 Today is ${person}'s birthday! 🎂`
+            : `${daysLeft} day${daysLeft !== 1 ? 's' : ''} left 🥳`,
+        id: isBirthdayToday
+            ? `🎉 Hari ini ulang tahun ${person}! 🎂`
+            : `${daysLeft} hari lagi 🥳`
+    };
+
+    getElement(`birthday-countdown_${person}`).textContent =
+        messages[state.currentLanguage];
+}
+
+function launchBirthdayConfetti() {
+    const duration = 5 * 1000;
+    const end = Date.now() + duration;
+
+    const colors = ['#ff4d6d', '#ff85a1', '#ffc2d1', '#ffd6ff', '#cdb4db'];
+
+    (function frame() {
+        confetti({
+            particleCount: 4,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0 },
+            colors: colors
+        });
+
+        confetti({
+            particleCount: 4,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1 },
+            colors: colors
+        });
+
+        if (Date.now() < end) {
+            requestAnimationFrame(frame);
         }
+    })();
+}
+
 
         function updateAnniversaryCountdown() {
             const now = new Date();
