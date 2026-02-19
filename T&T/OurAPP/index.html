@@ -679,16 +679,9 @@
 
 
   <script>
-    let deferredPrompt;
-    let installBtn;
-    let updateBtn;
+    let installBtn = document.getElementById('installBtn');
+    let updateBtn = document.getElementById('updateBtn');
       
-    document.addEventListener("DOMContentLoaded", () => {
-      installBtn = document.getElementById('installBtn');
-      updateBtn = document.getElementById('updateBtn');
-      initializeGallery();
-    });
-
     let currentImageIndex = 0;
     let allPhotos = [];
     let filteredPhotos = [];
@@ -897,34 +890,35 @@
   <script src="gallery-function.js"></script>
   <script src="button-function.js"></script>  
   <script src="../../JS/snow.js"></script>
-  <script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("service-worker.js")
-      .then(reg => {
-        console.log("[SW] Registered", reg);
+<script>
+let deferredPrompt;
 
-        // When a new SW is waiting, prompt app to update
-        if (reg.waiting) {
-          reg.waiting.postMessage({ type: "SKIP_WAITING" });
-        }
+window.addEventListener("beforeinstallprompt", (e) => {
+    console.log("Install available");
 
-        reg.addEventListener("updatefound", () => {
-          const newWorker = reg.installing;
-          newWorker.addEventListener("statechange", () => {
-            if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
-              console.log("[SW] New update available!");
-              localStorage.setItem("newVersionAvailable","true");
-              document.getElementById("updateBtn").style.display = "inline-block";
-              showUpdateModal();
-            }
-          });
-        });
-      })
-      .catch(err => console.error("[SW] Registration failed", err));
-  });
-}
+    e.preventDefault(); // Stop automatic banner
+    deferredPrompt = e;
+
+    // Show your custom install button
+    document.getElementById("installBtn").style.display = "block";
+});
+
+document.getElementById("installBtn").addEventListener("click", async () => {
+    if (!deferredPrompt) return;
+
+    deferredPrompt.prompt(); // 🔥 THIS is required
+
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log("User choice:", outcome);
+
+    deferredPrompt = null;
+
+    document.getElementById("installBtn").style.display = "none";
+});
 </script>
+
+
+
 
 </body>
 </html>
