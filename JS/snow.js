@@ -1,3 +1,4 @@
+function enable_Snow() {
         const snowflakes = [];
         let animationId = null;
 
@@ -69,3 +70,4 @@
         }
 
         startSnowing();
+}
