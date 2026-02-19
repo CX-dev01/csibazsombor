@@ -680,8 +680,15 @@
 
   <script>
     let deferredPrompt;
-    const installBtn = document.getElementById('installBtn');
-    const updateBtn = document.getElementById('updateBtn');
+    let installBtn;
+    let updateBtn;
+      
+    document.addEventListener("DOMContentLoaded", () => {
+      installBtn = document.getElementById('installBtn');
+      updateBtn = document.getElementById('updateBtn');
+      initializeGallery();
+    });
+
     let currentImageIndex = 0;
     let allPhotos = [];
     let filteredPhotos = [];

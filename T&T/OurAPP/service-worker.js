@@ -1,5 +1,5 @@
-const CACHE_VERSION = "our-relationship-cache-v7";
-const CACHE_NAME = `cache-${CACHE_VERSION}`;
+const CACHE_VERSION = "v8";
+const CACHE_NAME = `our-relationship-${CACHE_VERSION}`;;
 
 // Files required for offline usage
 const ASSETS = [
@@ -24,17 +24,21 @@ const ASSETS = [
 // INSTALL: Cache all assets
 // -------------------------
 self.addEventListener("install", event => {
-  console.log("[SW] Installing...");
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      console.log("[SW] Caching required files...");
-      return cache.addAll(ASSETS)
-        .then(() => console.log("[SW] All files cached!"))
-        .catch(err => console.error("[SW] Cache addAll ERROR:", err));
+    caches.open(CACHE_NAME).then(async cache => {
+      for (const asset of ASSETS) {
+        try {
+          await cache.add(asset);
+          console.log("[SW] Cached:", asset);
+        } catch (err) {
+          console.warn("[SW] Failed to cache:", asset);
+        }
+      }
     })
   );
   self.skipWaiting();
 });
+
 
 // -------------------------
 // ACTIVATE: Delete old caches
