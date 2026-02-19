@@ -723,10 +723,11 @@
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
       deferredPrompt = e;
-      console.log('beforeinstallprompt event captured');
-      installBtn.classList.add('show');
-      updateBtn.style.display = 'none';
+    
+      const btn = document.getElementById("installBtn");
+      btn.style.display = "inline-block";
     });
+
 
     // App installed
     window.addEventListener('appinstalled', () => {

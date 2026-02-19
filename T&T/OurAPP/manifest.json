@@ -4,19 +4,19 @@
   "version": "0.2.0",
   "author": "Csiba Zsombor and Febriyanti Aulia Adinda",
   "description": "Our Relationship!",
-  "start_url": "index.html",
+  "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#ffe6f0",
+  "background_color": "#1c0108",
   "theme_color": "#ff4da6",
   "icons": [
     {
       "src": "icon.png",
-      "sizes": "800x600",
+      "sizes": "192x192",
       "type": "image/png"
     },
     {
       "src": "icon.png",
-      "sizes": "800x60",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ]
