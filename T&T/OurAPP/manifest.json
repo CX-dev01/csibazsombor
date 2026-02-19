@@ -1,10 +1,9 @@
 {
   "name": "Our Relationship APP",
   "short_name": "Our APP",
-  "version": "0.2.0",
-  "author": "Csiba Zsombor and Febriyanti Aulia Adinda",
   "description": "Our Relationship!",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#1c0108",
   "theme_color": "#ff4da6",
@@ -13,11 +12,22 @@
       "src": "icon.png",
       "sizes": "192x192",
       "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "Screenshots/desktop.png",
+      "sizes": "1280x892",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Our Relationship APP on desktop"
     },
     {
-      "src": "icon.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "src": "Screenshots/mobile.png",
+      "sizes": "389x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Our Relationship APP on mobile"
     }
   ]
 }

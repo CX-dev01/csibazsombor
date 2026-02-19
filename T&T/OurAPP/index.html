@@ -17,7 +17,7 @@
   <div class="container">
 
     <button class="updateBtn" id="updateBtn" onclick="checkForUpdates()">Update APP</button>
-    <button class="add" id="installBtn" onclick="installApp()">Install APP</button>
+    <button class="add" id="installBtn" style="display:none" onclick="installApp()">Install APP</button>
     <h1>Our Relationship APP</h1>
     <p>May Allah unite our hearts in goodness. 🤲💞</p>
     <!-- Buttons Grid -->
@@ -712,16 +712,6 @@
       populateYearFilter();
     }
 
-    // Before install
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-    
-      const btn = document.getElementById("installBtn");
-      btn.style.display = "inline-block";
-    });
-
-
     // App installed
     window.addEventListener('appinstalled', () => {
       installBtn.classList.remove('show');
@@ -769,6 +759,13 @@
     }
 
   </script>
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./service-worker.js')
+      .then(reg => console.log('SW registered:', reg.scope))
+      .catch(err => console.error('SW registration failed:', err));
+  }
+</script>
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
   import {
@@ -890,32 +887,34 @@
   <script src="gallery-function.js"></script>
   <script src="button-function.js"></script>  
   <script src="../../JS/snow.js"></script>
-<script>
-let deferredPrompt;
-
-window.addEventListener("beforeinstallprompt", (e) => {
-    console.log("Install available");
-
-    e.preventDefault(); // Stop automatic banner
-    deferredPrompt = e;
-
-    // Show your custom install button
-    document.getElementById("installBtn").style.display = "block";
-});
-
-document.getElementById("installBtn").addEventListener("click", async () => {
-    if (!deferredPrompt) return;
-
-    deferredPrompt.prompt(); // 🔥 THIS is required
-
-    const { outcome } = await deferredPrompt.userChoice;
-    console.log("User choice:", outcome);
-
-    deferredPrompt = null;
-
-    document.getElementById("installBtn").style.display = "none";
-});
-</script>
+  <script>
+    let deferredPrompt;
+  
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      console.log("Install prompt saved");
+      document.getElementById("installBtn").style.display = "block";
+    });
+  
+    document.getElementById("installBtn").addEventListener("click", async () => {
+      if (!deferredPrompt) {
+        console.warn("No install prompt available");
+        return;
+      }
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      console.log("User choice:", outcome);
+      deferredPrompt = null;
+      document.getElementById("installBtn").style.display = "none";
+    });
+  
+    window.addEventListener("appinstalled", () => {
+      console.log("App installed!");
+      document.getElementById("installBtn").style.display = "none";
+      deferredPrompt = null;
+    });
+  </script>
 
 
 

@@ -4,9 +4,7 @@
 const CACHE_VERSION = "v9";
 const CACHE_NAME = `our-relationship-${CACHE_VERSION}`;
 
-// ===============================
-// FILES TO CACHE (MUST EXIST!)
-// ===============================
+// FILES TO CACHE
 const ASSETS = [
   "./",
   "./index.html",
@@ -19,7 +17,7 @@ const ASSETS = [
   "./updater.js",
   "./gallery-function.js",
   "./button-function.js",
-  "./snow.js", // <-- make sure this file is inside same folder
+  "../../JS/snow.js", 
 
   // Images
   "./Images/hug.jpg",
