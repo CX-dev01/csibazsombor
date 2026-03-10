@@ -860,7 +860,6 @@
       noteDiv.innerHTML = `
         <strong>${data.name}</strong> (${createdAt}): 
         <span>${data.text}</span>
-        <button onclick="deleteNote('${docSnap.id}')">🗑️ Delete</button>
       `;
       notesList.appendChild(noteDiv);
     });
@@ -878,7 +877,6 @@
   window.showNotes = showNotes;
   window.closeNotes = closeNotes;
   window.addNote = addNote;
-  window.deleteNote = deleteNote;
 </script>
 
 

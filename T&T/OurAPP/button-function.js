@@ -1,20 +1,20 @@
 // Links
 function togetherSince() {
   window.open(
-    "https://csibazsombor.github.io/csibazsombor/T&T/counter/index.html",
+    "https://cx-dev01.github.io/csibazsombor/T&T/counter/index.html",
     "_blank"
   );
 }
 
 function ourStory() {
   window.open(
-    "https://csibazsombor.github.io/csibazsombor/T&T/ourstory.html",
+    "https://cx-dev01.github.io/csibazsombor/T&T/ourstory.html",
     "_blank"
   );
 }
 function toyagames() {
   window.open(
-    "https://csibazsombor.github.io/toyagames",
+    "https://cx-dev01.github.io/toyagames",
     "_blank"
   );
 }
